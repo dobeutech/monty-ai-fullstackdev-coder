@@ -106,6 +106,22 @@ Before ending your session:
    - Recommendations for next session
 3. Leave the dev server in a working state
 
+## SESSION CLEANUP (CRITICAL)
+
+**IMPORTANT: Follow these rules exactly:**
+
+1. Ensure all code changes are saved and committed
+2. Run `git add -A && git commit -m "[agent] <description>"` if needed
+3. Update claude-progress.txt with session summary
+4. Provide a clear summary of work completed
+5. **Do NOT attempt to kill background processes**
+6. **Do NOT use KillShell** - let the harness handle cleanup
+7. **Do NOT use TaskOutput** for process management
+8. End naturally after providing your session summary
+
+The agent harness will automatically clean up background processes when the session ends.
+Attempting to manually terminate processes causes errors.
+
 ## BROWSER TESTING GUIDELINES
 
 ### Navigation

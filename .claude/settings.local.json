@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsx agent.ts)"
+      "Bash(npx tsx agent.ts)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

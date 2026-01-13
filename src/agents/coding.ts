@@ -81,6 +81,19 @@ ${browserInstructions}
 
 ---
 
+## WORKING DIRECTORY
+
+You are working in: ${agentConfig.paths.projectRoot}
+All file paths should be relative to this directory.
+
+CRITICAL SESSION RULES:
+- Do NOT use KillShell or attempt to terminate background processes
+- Do NOT use TaskOutput for shell management
+- Let the harness handle cleanup automatically
+- End your session naturally after providing a summary
+
+---
+
 ## CURRENT PROJECT STATE
 
 **Progress Summary:**
@@ -141,8 +154,16 @@ export async function runCodingAgent(additionalContext?: string): Promise<void> 
         }
       }
     } else if (message.type === "result") {
-      console.log("\n━".repeat(50));
-      console.log(`✅ Session ${message.subtype}`);
+      console.log("\n" + "━".repeat(50));
+      if (message.subtype === "success") {
+        console.log("✅ Session completed successfully");
+      } else if (message.subtype === "error_during_execution") {
+        console.log("⚠️  Session ended with errors - check logs above");
+        console.log("    Note: This may be due to background process cleanup.");
+        console.log("    If features were verified, the work was still saved.");
+      } else {
+        console.log(`ℹ️  Session ended: ${message.subtype}`);
+      }
       console.log(getFeatureSummary());
     }
   }

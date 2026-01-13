@@ -20,6 +20,41 @@ function isFirstRun(): boolean {
 }
 
 /**
+ * Run a function with retry logic for transient failures
+ * Implements exponential backoff with configurable max retries
+ */
+async function runWithRetry(
+  runFn: () => Promise<void>,
+  maxRetries: number = agentConfig.session.maxRetries
+): Promise<void> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      await runFn();
+      return;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
+      // Don't retry on certain errors that indicate configuration issues
+      if (errorMessage.includes("Feature list not found") || 
+          errorMessage.includes("not been initialized")) {
+        throw error;
+      }
+      
+      if (attempt === maxRetries) {
+        console.error(`\n❌ All ${maxRetries} attempts failed.`);
+        throw error;
+      }
+      
+      console.log(`\n⚠️  Attempt ${attempt}/${maxRetries} failed: ${errorMessage}`);
+      console.log(`   Retrying in ${attempt} second(s)...`);
+      
+      // Exponential backoff
+      await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+    }
+  }
+}
+
+/**
  * Parse command line arguments
  */
 function parseArgs(): {
@@ -121,14 +156,14 @@ For now, please describe what you want to build:
         mkdirSync(agentConfig.paths.agentDir, { recursive: true });
       }
       
-      await runInitializerAgent(spec);
+      await runWithRetry(() => runInitializerAgent(spec));
     } else {
       // Ensure .agent directory exists
       if (!existsSync(agentConfig.paths.agentDir)) {
         mkdirSync(agentConfig.paths.agentDir, { recursive: true });
       }
       
-      await runInitializerAgent(args.spec);
+      await runWithRetry(() => runInitializerAgent(args.spec));
     }
   } else {
     // Coding mode
@@ -145,7 +180,7 @@ The project has not been initialized. Run with --init flag first:
       process.exit(1);
     }
     
-    await runCodingAgent(args.context);
+    await runWithRetry(() => runCodingAgent(args.context));
   }
 }
 
