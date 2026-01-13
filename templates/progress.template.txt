@@ -1,0 +1,51 @@
+================================================================================
+PROJECT: [Project Name]
+CREATED: [Date]
+LAST SESSION: [Date/Time]
+================================================================================
+
+## PROJECT OVERVIEW
+[Brief description of the project and its goals. This section should provide
+enough context for any agent to understand what is being built and why.]
+
+## CURRENT STATE
+- Total Features: X
+- Completed: Y
+- Remaining: Z
+- Last Feature Worked On: [feature-id]
+
+## SESSION LOG
+### [Date/Time]
+- Agent: [initializer/coding]
+- Actions taken:
+  * [Action 1]
+  * [Action 2]
+  * [Action 3]
+- Features completed: [feat-001, feat-002]
+- Issues encountered: [list any problems]
+- Next steps:
+  * [Recommended action 1]
+  * [Recommended action 2]
+
+## KNOWN ISSUES
+- [Issue 1: Description and any workarounds]
+- [Issue 2: Description and any workarounds]
+
+## NOTES FOR NEXT SESSION
+- [Important context that the next agent should know]
+- [Pending decisions that need to be made]
+- [Dependencies or blockers to be aware of]
+
+## ENVIRONMENT SETUP
+- Dev server command: npm run dev
+- Test command: npm test
+- Build command: npm run build
+- Default URL: http://localhost:3000
+
+## DEPENDENCIES
+- [List key dependencies and versions]
+- [Note any special configuration required]
+
+================================================================================
+END OF PROGRESS FILE
+================================================================================

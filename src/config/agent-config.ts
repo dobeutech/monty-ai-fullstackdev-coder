@@ -1,0 +1,68 @@
+/**
+ * Agent Configuration
+ * Central configuration for the long-running agent framework.
+ * Based on Anthropic's best practices for effective agent harnesses.
+ */
+
+export interface AgentConfig {
+  paths: {
+    agentDir: string;
+    featureList: string;
+    progressFile: string;
+    templatesDir: string;
+  };
+  tools: {
+    initializer: string[];
+    coding: string[];
+  };
+  permissionMode: 'acceptEdits' | 'bypassPermissions' | 'default';
+  git: {
+    autoCommit: boolean;
+    commitMessagePrefix: string;
+  };
+  session: {
+    maxRetries: number;
+    verifyBasicFunctionality: boolean;
+  };
+}
+
+export const agentConfig: AgentConfig = {
+  paths: {
+    agentDir: '.agent',
+    featureList: '.agent/feature_list.json',
+    progressFile: '.agent/claude-progress.txt',
+    templatesDir: 'templates',
+  },
+  tools: {
+    // Initializer needs write access to create files
+    initializer: ['Read', 'Write', 'Bash', 'Glob'],
+    // Coding agent needs edit for incremental changes + browser for testing
+    coding: ['Read', 'Edit', 'Bash', 'Glob', 'Browser'],
+  },
+  permissionMode: 'acceptEdits',
+  git: {
+    autoCommit: true,
+    commitMessagePrefix: '[agent]',
+  },
+  session: {
+    maxRetries: 3,
+    verifyBasicFunctionality: true,
+  },
+};
+
+/**
+ * Get the full path for a config path relative to project root
+ */
+export function getAgentPath(key: keyof AgentConfig['paths']): string {
+  return agentConfig.paths[key];
+}
+
+/**
+ * Check if this is the first run (no .agent directory exists)
+ */
+export function isFirstRun(): boolean {
+  // This will be checked at runtime using fs.existsSync
+  return false; // Placeholder - actual check happens in index.ts
+}
+
+export default agentConfig;
