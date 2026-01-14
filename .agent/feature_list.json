@@ -17,9 +17,9 @@
         "Fill in all basic fields with valid data",
         "Verify no validation errors appear"
       ],
-      "passes": false,
-      "last_tested": null,
-      "notes": ""
+      "passes": true,
+      "last_tested": "2026-01-14T06:49:50.888Z",
+      "notes": "Browser automation test passed. All form fields (name, email, phone) are present and accept valid input without validation errors."
     },
     {
       "id": "feat-002",
@@ -33,9 +33,9 @@
         "Verify file upload success indicator appears",
         "Verify uploaded filename is displayed"
       ],
-      "passes": false,
-      "last_tested": null,
-      "notes": ""
+      "passes": true,
+      "last_tested": "2026-01-14T06:50:53.285Z",
+      "notes": "Browser automation test passed. Resume upload field found, PDF file uploaded successfully, success indicator and filename displayed."
     },
     {
       "id": "feat-003",
@@ -84,9 +84,9 @@
         "Enter valid email",
         "Verify error clears"
       ],
-      "passes": false,
-      "last_tested": null,
-      "notes": ""
+      "passes": true,
+      "last_tested": "2026-01-14T06:52:15.196Z",
+      "notes": "Email validation working. Invalid formats detected (missing @, no domain), valid emails accepted without errors."
     },
     {
       "id": "feat-006",
@@ -100,9 +100,9 @@
         "Enter valid phone number with various formats",
         "Verify all valid formats are accepted"
       ],
-      "passes": false,
-      "last_tested": null,
-      "notes": ""
+      "passes": true,
+      "last_tested": "2026-01-14T06:52:15.197Z",
+      "notes": "Phone validation working. Short phone numbers trigger error, various formats accepted (with/without dashes, parentheses, country code)."
     },
     {
       "id": "feat-007",
