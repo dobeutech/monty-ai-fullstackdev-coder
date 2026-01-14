@@ -1,0 +1,278 @@
+================================================================================
+UNIQUE STAFFING PROFESSIONALS INC. - PROJECT PROGRESS TRACKER
+================================================================================
+
+Project Name: Unique Staffing Professionals Inc. Staffing Agency Website
+Initialized: 2026-01-14
+Target Directory: E:\cursor\cursor-projects\uniquestaffingprofessionals\unique-staffing-prof
+
+================================================================================
+PROJECT OVERVIEW
+================================================================================
+
+TECHNOLOGY STACK:
+- Frontend: React 19 + TypeScript 5.7 + Vite 6
+- Styling: Tailwind CSS 4 + shadcn/ui components
+- Backend: Supabase (Database, Storage, Auth, Email)
+- Deployment: Netlify with GitHub Actions CI/CD
+- Testing: Playwright for E2E testing
+
+CORE FEATURES:
+1. Public application form with resume upload
+2. Admin dashboard for applicant management
+3. Visitor analytics and tracking
+4. Multi-language support (English, Spanish, French)
+5. Dark mode with system preference detection
+6. Accessibility controls (font size, high contrast, reduce motion)
+7. GDPR/CCPA cookie consent
+8. Email verification system
+9. SMS consent opt-in
+10. UTM tracking for marketing analytics
+11. OpenAPI documentation
+12. Comprehensive E2E testing with Playwright
+
+MAIN IMPROVEMENT AREAS:
+- Enhanced admin dashboard analytics with detailed metrics
+- Improved form validation UX with real-time feedback
+- Performance optimizations (code splitting, image optimization)
+- Comprehensive automated testing suite
+
+================================================================================
+FEATURE COMPLETION STATUS
+================================================================================
+
+Total Features: 187
+Completed: 0
+In Progress: 0
+Remaining: 187
+
+Completion Rate: 0%
+
+CATEGORY BREAKDOWN:
+- Functional Features: ~85 features
+- UI/UX Features: ~40 features
+- Integration Features: ~20 features
+- Performance Features: ~12 features
+- Accessibility Features: ~15 features
+- Testing Features: ~15 features
+
+================================================================================
+INITIAL STATE DOCUMENTATION
+================================================================================
+
+DIRECTORY STRUCTURE:
+E:\cursor\cursor-projects\uniquestaffingprofessionals\unique-staffing-prof\
+├── src/
+│   ├── components/      # React components (shadcn/ui)
+│   ├── pages/           # Page components
+│   ├── lib/             # Utilities, Supabase client
+│   ├── hooks/           # Custom React hooks
+│   ├── i18n/            # Multi-language translations
+│   └── styles/          # Tailwind CSS styles
+├── public/              # Static assets
+├── .agent/              # Agent tracking and scripts
+│   ├── feature_list.json
+│   ├── claude-progress.txt
+│   └── scripts/
+├── tests/               # Playwright E2E tests
+├── netlify.toml         # Netlify configuration
+├── vite.config.ts       # Vite configuration
+├── tailwind.config.js   # Tailwind configuration
+├── tsconfig.json        # TypeScript configuration
+└── package.json         # Dependencies
+
+ENVIRONMENT VARIABLES REQUIRED:
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_ANON_KEY
+- SUPABASE_SERVICE_ROLE_KEY (for admin operations)
+- EMAIL_SERVICE_CONFIG (for email verification)
+- ANALYTICS_API_KEY (if using external analytics)
+
+SUPABASE SCHEMA REQUIREMENTS:
+Tables:
+- applicants (id, name, email, phone, resume_url, status, email_verified, sms_consent, utm_data, created_at, updated_at)
+- admin_users (id, email, password_hash, role, created_at)
+- analytics_events (id, event_type, page, visitor_id, session_id, timestamp, metadata)
+- utm_tracking (id, applicant_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content)
+
+Storage Buckets:
+- resumes (for applicant resume uploads)
+
+================================================================================
+CONSTRAINTS AND REQUIREMENTS
+================================================================================
+
+ACCESSIBILITY REQUIREMENTS:
+- WCAG 2.1 AA compliance minimum
+- Keyboard navigation for all interactive elements
+- Screen reader support with proper ARIA labels
+- Color contrast ratios meeting 4.5:1 for text
+- Focus indicators visible on all focusable elements
+
+PERFORMANCE TARGETS:
+- Initial page load: < 3 seconds
+- Time to interactive: < 5 seconds
+- Lighthouse performance score: 90+
+- First Contentful Paint: < 1.5 seconds
+
+SECURITY REQUIREMENTS:
+- HTTPS enforced in production
+- Password hashing with bcrypt/argon2
+- CSRF protection on all forms
+- Rate limiting on API endpoints
+- Input sanitization to prevent XSS
+- SQL injection prevention via parameterized queries
+
+COMPLIANCE REQUIREMENTS:
+- GDPR compliance for EU visitors
+- CCPA compliance for California residents
+- Cookie consent banner with granular controls
+- Privacy policy and terms of service pages
+- Data export capability for users
+
+BROWSER SUPPORT:
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+- Mobile browsers (iOS Safari, Chrome Android)
+
+================================================================================
+SESSION LOG
+================================================================================
+
+Format for each session:
+---
+Session: [Date] - [Time]
+Agent: [Agent ID/Name]
+Focus: [Primary goals for this session]
+
+Actions Taken:
+- [List of specific actions]
+
+Features Completed:
+- [Feature IDs and descriptions]
+
+Blockers/Issues:
+- [Any problems encountered]
+
+Next Steps:
+- [What should be done next]
+---
+
+[Session entries will be added below as work progresses]
+
+================================================================================
+TESTING STRATEGY
+================================================================================
+
+E2E TESTING WITH PLAYWRIGHT:
+- Form submission flows
+- Admin authentication and authorization
+- Applicant filtering and sorting
+- CSV export functionality
+- Multi-language switching
+- Dark mode toggle
+- Accessibility scanning (axe-core integration)
+- Visual regression testing
+- Cross-browser testing (Chrome, Firefox, Safari)
+
+UNIT TESTING (if implemented):
+- Form validation logic
+- Utility functions
+- Custom hooks
+- API client methods
+
+INTEGRATION TESTING:
+- Supabase database operations
+- Storage upload/download
+- Email service integration
+- Analytics tracking
+
+================================================================================
+DEPLOYMENT PIPELINE
+================================================================================
+
+GITHUB ACTIONS WORKFLOW:
+1. On push to main: Run tests → Build → Deploy to Netlify production
+2. On pull request: Run tests → Build → Deploy to Netlify preview
+
+NETLIFY CONFIGURATION:
+- Build command: npm run build
+- Publish directory: dist
+- Environment variables configured in Netlify dashboard
+- Custom domain with SSL
+- Redirects for SPA routing
+
+================================================================================
+KNOWN DEPENDENCIES
+================================================================================
+
+CRITICAL DEPENDENCIES:
+- @supabase/supabase-js (Supabase client)
+- react, react-dom (React framework)
+- react-router-dom (Client-side routing)
+- @radix-ui/* (shadcn/ui primitives)
+- tailwindcss (Styling framework)
+- i18next, react-i18next (Multi-language support)
+- @playwright/test (E2E testing)
+
+DEV DEPENDENCIES:
+- vite (Build tool)
+- typescript (Type checking)
+- @types/react, @types/node (TypeScript definitions)
+- eslint, prettier (Code quality)
+- @vitejs/plugin-react (Vite React plugin)
+
+================================================================================
+NOTES FOR FUTURE CODING AGENTS
+================================================================================
+
+1. ALWAYS check feature_list.json before starting work to avoid duplicate efforts
+
+2. Mark features as passing ONLY after verification via browser automation tests
+
+3. Update this progress file at the END of each session with:
+   - Features completed
+   - Current blockers
+   - Next recommended steps
+
+4. Follow existing code patterns:
+   - Use TypeScript strict mode
+   - Follow React 19 best practices (no deprecated patterns)
+   - Use Tailwind utility classes, avoid custom CSS
+   - Leverage shadcn/ui components for consistency
+
+5. Testing workflow:
+   - Write Playwright tests as features are implemented
+   - Run tests locally before marking features as complete
+   - Ensure tests pass in CI/CD pipeline
+
+6. Accessibility is NON-NEGOTIABLE:
+   - Every interactive element must be keyboard accessible
+   - All images must have alt text
+   - Forms must have proper labels and error announcements
+
+7. Multi-language support:
+   - Add translations to i18n files for ALL user-facing text
+   - Test language switching functionality
+   - Ensure RTL support if adding Arabic/Hebrew in future
+
+8. Performance monitoring:
+   - Run Lighthouse audits regularly
+   - Check bundle sizes after adding dependencies
+   - Optimize images before committing
+
+9. Security first:
+   - Never commit API keys or secrets
+   - Always validate user input
+   - Use Supabase RLS policies for data access control
+
+10. Git commit conventions:
+    - Use conventional commits format
+    - Include [agent] prefix for agent-generated commits
+    - Reference feature IDs in commit messages
+
+================================================================================
+END OF INITIAL STATE DOCUMENTATION
+================================================================================

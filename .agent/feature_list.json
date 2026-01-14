@@ -1,0 +1,3003 @@
+{
+  "project": "Unique Staffing Professionals Inc.",
+  "version": "1.0.0",
+  "last_updated": "2026-01-14",
+  "total_features": 187,
+  "features": [
+    {
+      "id": "feat-001",
+      "category": "functional",
+      "priority": 1,
+      "description": "Public application form - Basic information fields (name, email, phone)",
+      "steps": [
+        "Navigate to application page",
+        "Verify name input field is present and accepts text",
+        "Verify email input field is present and accepts email format",
+        "Verify phone input field is present and accepts phone format",
+        "Fill in all basic fields with valid data",
+        "Verify no validation errors appear"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-002",
+      "category": "functional",
+      "priority": 1,
+      "description": "Public application form - Resume upload functionality",
+      "steps": [
+        "Navigate to application page",
+        "Locate resume upload field",
+        "Upload a valid PDF resume file",
+        "Verify file upload success indicator appears",
+        "Verify uploaded filename is displayed"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-003",
+      "category": "functional",
+      "priority": 2,
+      "description": "Resume upload - File type validation (PDF, DOC, DOCX only)",
+      "steps": [
+        "Navigate to application page",
+        "Attempt to upload invalid file type (.txt, .jpg)",
+        "Verify error message appears",
+        "Upload valid PDF file",
+        "Verify upload succeeds",
+        "Upload valid DOCX file",
+        "Verify upload succeeds"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-004",
+      "category": "functional",
+      "priority": 2,
+      "description": "Resume upload - File size validation (max 10MB)",
+      "steps": [
+        "Navigate to application page",
+        "Attempt to upload file larger than 10MB",
+        "Verify error message appears stating size limit",
+        "Upload file under 10MB",
+        "Verify upload succeeds"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-005",
+      "category": "functional",
+      "priority": 1,
+      "description": "Form validation - Email format validation",
+      "steps": [
+        "Navigate to application page",
+        "Enter invalid email format (missing @, no domain)",
+        "Attempt to submit or blur field",
+        "Verify inline validation error appears",
+        "Enter valid email",
+        "Verify error clears"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-006",
+      "category": "functional",
+      "priority": 1,
+      "description": "Form validation - Phone number format validation",
+      "steps": [
+        "Navigate to application page",
+        "Enter invalid phone number (letters, too short)",
+        "Verify validation error appears",
+        "Enter valid phone number with various formats",
+        "Verify all valid formats are accepted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-007",
+      "category": "functional",
+      "priority": 1,
+      "description": "Form validation - Required fields validation",
+      "steps": [
+        "Navigate to application page",
+        "Leave required fields empty",
+        "Attempt to submit form",
+        "Verify all required field errors are displayed",
+        "Verify form does not submit"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-008",
+      "category": "functional",
+      "priority": 1,
+      "description": "Form submission - Successful submission with all valid data",
+      "steps": [
+        "Navigate to application page",
+        "Fill all required fields with valid data",
+        "Upload valid resume",
+        "Submit form",
+        "Verify success message appears",
+        "Verify form clears or redirects to confirmation page"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-009",
+      "category": "functional",
+      "priority": 2,
+      "description": "Form submission - Data persistence to Supabase database",
+      "steps": [
+        "Submit application form with unique test data",
+        "Verify submission success",
+        "Check admin dashboard for new applicant",
+        "Verify all submitted data appears correctly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-010",
+      "category": "functional",
+      "priority": 2,
+      "description": "Form submission - Resume file upload to Supabase storage",
+      "steps": [
+        "Submit application with resume upload",
+        "Verify submission success",
+        "Check admin dashboard for applicant",
+        "Verify resume download link is present",
+        "Download resume and verify file integrity"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-011",
+      "category": "functional",
+      "priority": 1,
+      "description": "Email verification - Verification email sent on submission",
+      "steps": [
+        "Submit application with valid email",
+        "Check email inbox for verification email",
+        "Verify email contains verification link",
+        "Verify email is properly formatted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-012",
+      "category": "functional",
+      "priority": 1,
+      "description": "Email verification - Click verification link to confirm email",
+      "steps": [
+        "Submit application",
+        "Receive verification email",
+        "Click verification link",
+        "Verify redirect to confirmation page",
+        "Verify applicant status updates in database"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-013",
+      "category": "functional",
+      "priority": 2,
+      "description": "SMS consent - Checkbox for SMS notifications opt-in",
+      "steps": [
+        "Navigate to application page",
+        "Verify SMS consent checkbox is present",
+        "Check the SMS consent checkbox",
+        "Submit form",
+        "Verify SMS consent is recorded in database"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-014",
+      "category": "functional",
+      "priority": 2,
+      "description": "SMS consent - SMS opt-in status saved to database",
+      "steps": [
+        "Submit application with SMS consent checked",
+        "Check database for applicant record",
+        "Verify SMS consent field is true",
+        "Submit another application without SMS consent",
+        "Verify SMS consent field is false"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-015",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin authentication - Login page with email/password",
+      "steps": [
+        "Navigate to admin login page",
+        "Verify email and password fields are present",
+        "Enter valid admin credentials",
+        "Click login button",
+        "Verify redirect to admin dashboard"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-016",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin authentication - Invalid credentials error handling",
+      "steps": [
+        "Navigate to admin login page",
+        "Enter invalid credentials",
+        "Attempt login",
+        "Verify error message appears",
+        "Verify user remains on login page"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-017",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin authentication - Protected routes require authentication",
+      "steps": [
+        "Attempt to navigate directly to admin dashboard URL without login",
+        "Verify redirect to login page",
+        "Login with valid credentials",
+        "Verify access to dashboard is granted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-018",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin authentication - Logout functionality",
+      "steps": [
+        "Login to admin dashboard",
+        "Locate and click logout button",
+        "Verify redirect to login page",
+        "Attempt to access dashboard",
+        "Verify redirect back to login"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-019",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin authentication - Session persistence",
+      "steps": [
+        "Login to admin dashboard",
+        "Refresh page",
+        "Verify user remains logged in",
+        "Close and reopen browser",
+        "Verify session state based on remember me option"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-020",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Display list of all applicants",
+      "steps": [
+        "Login to admin dashboard",
+        "Navigate to applicants list",
+        "Verify all submitted applications are displayed",
+        "Verify basic applicant info is shown (name, email, date)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-021",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - View individual applicant details",
+      "steps": [
+        "Login to admin dashboard",
+        "Click on an applicant from the list",
+        "Verify detailed view opens with all applicant information",
+        "Verify resume download link is present",
+        "Verify all form fields are displayed"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-022",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Filter applicants by status",
+      "steps": [
+        "Login to admin dashboard",
+        "Locate status filter dropdown",
+        "Select 'New' status",
+        "Verify only new applicants are displayed",
+        "Select 'Reviewed' status",
+        "Verify filtered results update"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-023",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Filter applicants by date range",
+      "steps": [
+        "Login to admin dashboard",
+        "Locate date range filter",
+        "Select start and end dates",
+        "Apply filter",
+        "Verify only applicants within date range are shown"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-024",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Filter applicants by email verification status",
+      "steps": [
+        "Login to admin dashboard",
+        "Apply email verification filter",
+        "Select 'Verified' option",
+        "Verify only verified applicants shown",
+        "Select 'Unverified' option",
+        "Verify results update"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-025",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Filter applicants by SMS consent",
+      "steps": [
+        "Login to admin dashboard",
+        "Apply SMS consent filter",
+        "Select 'Opted In' option",
+        "Verify only opted-in applicants shown",
+        "Clear filter",
+        "Verify all applicants shown again"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-026",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Sort applicants by name (A-Z, Z-A)",
+      "steps": [
+        "Login to admin dashboard",
+        "Click name column header to sort",
+        "Verify applicants sorted alphabetically A-Z",
+        "Click again to reverse sort",
+        "Verify applicants sorted Z-A"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-027",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Sort applicants by submission date (newest/oldest)",
+      "steps": [
+        "Login to admin dashboard",
+        "Click date column header",
+        "Verify applicants sorted by newest first",
+        "Click again",
+        "Verify applicants sorted by oldest first"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-028",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Sort applicants by status",
+      "steps": [
+        "Login to admin dashboard",
+        "Click status column header",
+        "Verify applicants sorted by status",
+        "Verify sort order is logical (New, Reviewed, etc.)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-029",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Update applicant status (New, Reviewed, Contacted, Hired, Rejected)",
+      "steps": [
+        "Login to admin dashboard",
+        "Open applicant details",
+        "Change status from 'New' to 'Reviewed'",
+        "Verify status updates in UI",
+        "Verify status persists in database",
+        "Test all status transitions"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-030",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Add notes to applicant profile",
+      "steps": [
+        "Login to admin dashboard",
+        "Open applicant details",
+        "Locate notes field",
+        "Add note text",
+        "Save note",
+        "Verify note appears in applicant profile",
+        "Verify note persists on page refresh"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-031",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Export applicants to CSV",
+      "steps": [
+        "Login to admin dashboard",
+        "Apply filters to select specific applicants",
+        "Click CSV export button",
+        "Verify CSV file downloads",
+        "Open CSV and verify all applicant data is present",
+        "Verify CSV formatting is correct"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-032",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - CSV export includes all fields",
+      "steps": [
+        "Export applicants to CSV",
+        "Open CSV file",
+        "Verify all form fields are included as columns",
+        "Verify resume URLs are included",
+        "Verify timestamps are included"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-033",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - CSV export respects active filters",
+      "steps": [
+        "Apply status filter to show only 'New' applicants",
+        "Export to CSV",
+        "Verify CSV only contains filtered applicants",
+        "Clear filters and export again",
+        "Verify CSV contains all applicants"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-034",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin dashboard - Pagination for large applicant lists",
+      "steps": [
+        "Login to admin dashboard with 50+ applicants",
+        "Verify pagination controls appear",
+        "Click next page",
+        "Verify next set of applicants loads",
+        "Navigate through multiple pages",
+        "Verify page numbers update correctly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-035",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Search applicants by name",
+      "steps": [
+        "Login to admin dashboard",
+        "Locate search input",
+        "Enter applicant name",
+        "Verify search results filter in real-time",
+        "Verify only matching applicants are shown"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-036",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Search applicants by email",
+      "steps": [
+        "Login to admin dashboard",
+        "Enter email address in search",
+        "Verify applicant with matching email appears",
+        "Test partial email search",
+        "Verify fuzzy matching works"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-037",
+      "category": "functional",
+      "priority": 1,
+      "description": "Visitor analytics - Track page views",
+      "steps": [
+        "Visit public pages",
+        "Login to admin dashboard analytics section",
+        "Verify page view counts are recorded",
+        "Verify page view data updates with new visits"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-038",
+      "category": "functional",
+      "priority": 2,
+      "description": "Visitor analytics - Track unique visitors",
+      "steps": [
+        "Clear cookies and visit site",
+        "Check analytics dashboard",
+        "Verify unique visitor count increments",
+        "Revisit site",
+        "Verify unique visitor count does not increment again"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-039",
+      "category": "functional",
+      "priority": 2,
+      "description": "Visitor analytics - Track form submission conversions",
+      "steps": [
+        "Check initial conversion rate in analytics",
+        "Submit application form",
+        "Refresh analytics dashboard",
+        "Verify conversion count increments",
+        "Verify conversion rate percentage updates"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-040",
+      "category": "functional",
+      "priority": 2,
+      "description": "Visitor analytics - Display analytics charts/graphs",
+      "steps": [
+        "Login to admin dashboard analytics",
+        "Verify charts are rendered",
+        "Verify data visualization is accurate",
+        "Check different time ranges",
+        "Verify charts update accordingly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-041",
+      "category": "functional",
+      "priority": 2,
+      "description": "UTM tracking - Capture UTM parameters from URL",
+      "steps": [
+        "Visit site with UTM parameters (?utm_source=google&utm_medium=cpc)",
+        "Submit application form",
+        "Check admin dashboard for applicant",
+        "Verify UTM parameters are recorded with applicant data"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-042",
+      "category": "functional",
+      "priority": 2,
+      "description": "UTM tracking - Display UTM data in admin dashboard",
+      "steps": [
+        "Login to admin dashboard",
+        "View applicant details who came via UTM link",
+        "Verify UTM source, medium, campaign data is displayed",
+        "Verify UTM data is exportable in CSV"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-043",
+      "category": "functional",
+      "priority": 2,
+      "description": "UTM tracking - Analytics breakdown by traffic source",
+      "steps": [
+        "Login to admin analytics",
+        "Locate traffic source breakdown",
+        "Verify different UTM sources are categorized",
+        "Verify conversion rates by source are shown"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-044",
+      "category": "functional",
+      "priority": 1,
+      "description": "Multi-language support - English (en) language option",
+      "steps": [
+        "Visit website",
+        "Locate language selector",
+        "Select English",
+        "Verify all text content displays in English",
+        "Navigate through all pages",
+        "Verify language consistency"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-045",
+      "category": "functional",
+      "priority": 1,
+      "description": "Multi-language support - Spanish (es) language option",
+      "steps": [
+        "Locate language selector",
+        "Select Spanish",
+        "Verify all text content displays in Spanish",
+        "Verify form labels are translated",
+        "Verify validation messages are in Spanish"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-046",
+      "category": "functional",
+      "priority": 1,
+      "description": "Multi-language support - French (fr) language option",
+      "steps": [
+        "Locate language selector",
+        "Select French",
+        "Verify all text content displays in French",
+        "Verify navigation menu is translated",
+        "Verify footer content is in French"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-047",
+      "category": "functional",
+      "priority": 2,
+      "description": "Multi-language support - Language preference persistence",
+      "steps": [
+        "Select Spanish as language",
+        "Refresh page",
+        "Verify Spanish language persists",
+        "Close and reopen browser",
+        "Verify language preference is remembered"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-048",
+      "category": "functional",
+      "priority": 2,
+      "description": "Multi-language support - Language switcher accessible on all pages",
+      "steps": [
+        "Navigate to homepage",
+        "Verify language switcher is visible",
+        "Navigate to application form",
+        "Verify language switcher is still accessible",
+        "Test on all public pages"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-049",
+      "category": "functional",
+      "priority": 1,
+      "description": "Dark mode - Toggle dark mode on/off",
+      "steps": [
+        "Locate dark mode toggle",
+        "Click to enable dark mode",
+        "Verify page theme switches to dark",
+        "Click to disable dark mode",
+        "Verify page returns to light theme"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-050",
+      "category": "functional",
+      "priority": 2,
+      "description": "Dark mode - Dark mode preference persistence",
+      "steps": [
+        "Enable dark mode",
+        "Refresh page",
+        "Verify dark mode persists",
+        "Close and reopen browser",
+        "Verify dark mode preference is saved"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-051",
+      "category": "functional",
+      "priority": 2,
+      "description": "Dark mode - System preference detection",
+      "steps": [
+        "Set OS to dark mode",
+        "Visit site for first time (no saved preference)",
+        "Verify site defaults to dark mode",
+        "Set OS to light mode",
+        "Clear preferences and revisit",
+        "Verify site defaults to light mode"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-052",
+      "category": "ui",
+      "priority": 2,
+      "description": "Dark mode - All components properly styled in dark mode",
+      "steps": [
+        "Enable dark mode",
+        "Navigate through all pages",
+        "Verify buttons have dark mode styles",
+        "Verify forms are readable in dark mode",
+        "Verify no white backgrounds bleeding through",
+        "Verify text contrast meets accessibility standards"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-053",
+      "category": "functional",
+      "priority": 1,
+      "description": "Cookie consent - GDPR/CCPA cookie banner display",
+      "steps": [
+        "Visit site for first time (clear cookies)",
+        "Verify cookie consent banner appears",
+        "Verify banner explains cookie usage",
+        "Verify GDPR/CCPA compliance text is present"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-054",
+      "category": "functional",
+      "priority": 1,
+      "description": "Cookie consent - Accept all cookies option",
+      "steps": [
+        "Display cookie consent banner",
+        "Click 'Accept All' button",
+        "Verify banner dismisses",
+        "Verify analytics cookies are set",
+        "Refresh page",
+        "Verify banner does not reappear"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-055",
+      "category": "functional",
+      "priority": 1,
+      "description": "Cookie consent - Reject non-essential cookies option",
+      "steps": [
+        "Display cookie consent banner",
+        "Click 'Reject' or 'Essential Only' button",
+        "Verify banner dismisses",
+        "Verify analytics cookies are NOT set",
+        "Verify essential cookies are still set"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-056",
+      "category": "functional",
+      "priority": 2,
+      "description": "Cookie consent - Cookie preferences customization",
+      "steps": [
+        "Display cookie consent banner",
+        "Click 'Customize' or 'Manage Preferences'",
+        "Verify detailed cookie categories are shown",
+        "Toggle specific cookie categories",
+        "Save preferences",
+        "Verify only selected cookies are set"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-057",
+      "category": "functional",
+      "priority": 2,
+      "description": "Cookie consent - Privacy policy link in banner",
+      "steps": [
+        "Display cookie consent banner",
+        "Locate privacy policy link",
+        "Click link",
+        "Verify privacy policy page opens",
+        "Verify policy content explains cookie usage"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-058",
+      "category": "accessibility",
+      "priority": 1,
+      "description": "Accessibility - Keyboard navigation throughout site",
+      "steps": [
+        "Using only keyboard (Tab, Enter, Arrow keys)",
+        "Navigate through entire site",
+        "Verify all interactive elements are reachable",
+        "Verify focus indicators are visible",
+        "Verify logical tab order"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-059",
+      "category": "accessibility",
+      "priority": 1,
+      "description": "Accessibility - Screen reader support (ARIA labels)",
+      "steps": [
+        "Enable screen reader",
+        "Navigate site with screen reader",
+        "Verify all interactive elements are announced",
+        "Verify form fields have proper labels",
+        "Verify images have alt text",
+        "Verify ARIA landmarks are present"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-060",
+      "category": "accessibility",
+      "priority": 1,
+      "description": "Accessibility - Color contrast meets WCAG AA standards",
+      "steps": [
+        "Run color contrast checker on all text",
+        "Verify text-to-background contrast is at least 4.5:1",
+        "Check both light and dark mode",
+        "Verify button states have sufficient contrast",
+        "Verify link text is distinguishable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-061",
+      "category": "accessibility",
+      "priority": 2,
+      "description": "Accessibility - Focus visible on all interactive elements",
+      "steps": [
+        "Tab through all interactive elements",
+        "Verify visible focus ring/outline on each element",
+        "Verify focus is never lost or hidden",
+        "Check buttons, links, form inputs, toggles"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-062",
+      "category": "accessibility",
+      "priority": 2,
+      "description": "Accessibility - Skip to main content link",
+      "steps": [
+        "Load any page",
+        "Press Tab key once",
+        "Verify 'Skip to main content' link appears",
+        "Activate link",
+        "Verify focus moves to main content area"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-063",
+      "category": "accessibility",
+      "priority": 2,
+      "description": "Accessibility - Semantic HTML structure",
+      "steps": [
+        "Inspect page HTML",
+        "Verify proper heading hierarchy (h1, h2, h3)",
+        "Verify semantic tags used (nav, main, footer, article)",
+        "Verify no div/span soup for structural elements"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-064",
+      "category": "accessibility",
+      "priority": 2,
+      "description": "Accessibility - Form error messages announced to screen readers",
+      "steps": [
+        "Enable screen reader",
+        "Submit form with validation errors",
+        "Verify errors are announced",
+        "Verify focus moves to first error",
+        "Verify aria-live regions update"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-065",
+      "category": "accessibility",
+      "priority": 2,
+      "description": "Accessibility controls - Font size adjustment",
+      "steps": [
+        "Locate accessibility controls",
+        "Click increase font size",
+        "Verify text size increases",
+        "Click decrease font size",
+        "Verify text size decreases",
+        "Verify layout remains intact"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-066",
+      "category": "accessibility",
+      "priority": 3,
+      "description": "Accessibility controls - High contrast mode toggle",
+      "steps": [
+        "Locate high contrast toggle",
+        "Enable high contrast mode",
+        "Verify colors adjust to high contrast palette",
+        "Verify text is clearly readable",
+        "Disable and verify return to normal"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-067",
+      "category": "accessibility",
+      "priority": 3,
+      "description": "Accessibility controls - Reduce motion option",
+      "steps": [
+        "Enable reduce motion setting",
+        "Verify animations are disabled or reduced",
+        "Verify transitions are minimized",
+        "Verify core functionality still works"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-068",
+      "category": "integration",
+      "priority": 1,
+      "description": "Supabase - Database connection established",
+      "steps": [
+        "Check application logs",
+        "Verify Supabase client initializes successfully",
+        "Submit test form",
+        "Verify data reaches Supabase database",
+        "Check for connection errors in console"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-069",
+      "category": "integration",
+      "priority": 1,
+      "description": "Supabase - Row level security policies enforced",
+      "steps": [
+        "Attempt to access data without authentication",
+        "Verify access is denied",
+        "Authenticate as admin",
+        "Verify data access is granted",
+        "Test public read access where appropriate"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-070",
+      "category": "integration",
+      "priority": 1,
+      "description": "Supabase - Storage bucket configured for resumes",
+      "steps": [
+        "Upload resume through application form",
+        "Verify file appears in Supabase storage bucket",
+        "Verify file permissions are correct",
+        "Download file from admin dashboard",
+        "Verify file integrity"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-071",
+      "category": "integration",
+      "priority": 2,
+      "description": "Supabase - Real-time updates in admin dashboard",
+      "steps": [
+        "Open admin dashboard",
+        "Submit new application in different browser",
+        "Verify new applicant appears in dashboard without refresh",
+        "Update applicant status",
+        "Verify update reflects in real-time"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-072",
+      "category": "integration",
+      "priority": 2,
+      "description": "Supabase - Email service configured",
+      "steps": [
+        "Submit application",
+        "Verify email sending does not throw errors",
+        "Check email delivery",
+        "Verify email templates render correctly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-073",
+      "category": "integration",
+      "priority": 1,
+      "description": "OpenAPI documentation - API endpoints documented",
+      "steps": [
+        "Navigate to /api/docs or OpenAPI endpoint",
+        "Verify documentation page loads",
+        "Verify all API endpoints are listed",
+        "Verify request/response schemas are defined"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-074",
+      "category": "integration",
+      "priority": 2,
+      "description": "OpenAPI documentation - Interactive API testing",
+      "steps": [
+        "Navigate to API documentation",
+        "Select an endpoint",
+        "Use 'Try it out' feature",
+        "Submit test request",
+        "Verify response is displayed"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-075",
+      "category": "integration",
+      "priority": 2,
+      "description": "OpenAPI documentation - Authentication examples included",
+      "steps": [
+        "View API documentation",
+        "Locate authentication section",
+        "Verify auth methods are documented",
+        "Verify example requests include auth headers"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-076",
+      "category": "ui",
+      "priority": 1,
+      "description": "Responsive design - Mobile viewport (320px-767px)",
+      "steps": [
+        "Resize browser to 375px width",
+        "Navigate through all pages",
+        "Verify layout adapts properly",
+        "Verify no horizontal scroll",
+        "Verify text is readable",
+        "Verify buttons are tappable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-077",
+      "category": "ui",
+      "priority": 1,
+      "description": "Responsive design - Tablet viewport (768px-1023px)",
+      "steps": [
+        "Resize browser to 768px width",
+        "Verify tablet layout is applied",
+        "Verify navigation adapts appropriately",
+        "Verify form layout is optimized",
+        "Test in both portrait and landscape"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-078",
+      "category": "ui",
+      "priority": 1,
+      "description": "Responsive design - Desktop viewport (1024px+)",
+      "steps": [
+        "View site at 1920px width",
+        "Verify desktop layout is applied",
+        "Verify multi-column layouts work",
+        "Verify max-width constraints prevent over-stretching"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-079",
+      "category": "ui",
+      "priority": 2,
+      "description": "Responsive design - Mobile navigation menu",
+      "steps": [
+        "View site on mobile viewport",
+        "Verify hamburger menu icon appears",
+        "Click hamburger icon",
+        "Verify mobile menu opens",
+        "Verify menu items are accessible",
+        "Close menu and verify it closes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-080",
+      "category": "ui",
+      "priority": 1,
+      "description": "Homepage - Company branding and logo",
+      "steps": [
+        "Navigate to homepage",
+        "Verify company logo is displayed",
+        "Verify logo is high quality (not pixelated)",
+        "Verify logo links to homepage",
+        "Verify branding is consistent across pages"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-081",
+      "category": "ui",
+      "priority": 1,
+      "description": "Homepage - Hero section with call-to-action",
+      "steps": [
+        "Load homepage",
+        "Verify hero section is prominently displayed",
+        "Verify headline text is clear",
+        "Verify CTA button is visible",
+        "Click CTA button",
+        "Verify navigation to application form"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-082",
+      "category": "ui",
+      "priority": 2,
+      "description": "Homepage - Services/offerings section",
+      "steps": [
+        "Scroll through homepage",
+        "Verify services section is present",
+        "Verify services are clearly described",
+        "Verify icons or images accompany descriptions"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-083",
+      "category": "ui",
+      "priority": 2,
+      "description": "Homepage - Testimonials or social proof",
+      "steps": [
+        "Locate testimonials section",
+        "Verify testimonials are displayed",
+        "Verify proper formatting and attribution",
+        "Verify images if applicable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-084",
+      "category": "ui",
+      "priority": 1,
+      "description": "Navigation - Main navigation menu present on all pages",
+      "steps": [
+        "Navigate to homepage",
+        "Verify main menu is visible",
+        "Navigate to other pages",
+        "Verify menu remains accessible",
+        "Verify active page is highlighted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-085",
+      "category": "ui",
+      "priority": 2,
+      "description": "Navigation - Sticky header on scroll",
+      "steps": [
+        "Scroll down a long page",
+        "Verify header/navigation remains visible",
+        "Verify header shrinks or changes style on scroll",
+        "Scroll back up",
+        "Verify header returns to original state"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-086",
+      "category": "ui",
+      "priority": 1,
+      "description": "Footer - Company contact information",
+      "steps": [
+        "Scroll to footer on any page",
+        "Verify company address is displayed",
+        "Verify phone number is present",
+        "Verify email address is shown",
+        "Verify contact links are clickable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-087",
+      "category": "ui",
+      "priority": 2,
+      "description": "Footer - Social media links",
+      "steps": [
+        "Locate footer",
+        "Verify social media icons are present",
+        "Click each social media link",
+        "Verify links open in new tab",
+        "Verify links go to correct social profiles"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-088",
+      "category": "ui",
+      "priority": 2,
+      "description": "Footer - Privacy policy and terms of service links",
+      "steps": [
+        "Locate footer",
+        "Verify Privacy Policy link is present",
+        "Verify Terms of Service link is present",
+        "Click each link",
+        "Verify respective pages load"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-089",
+      "category": "ui",
+      "priority": 2,
+      "description": "Footer - Copyright notice",
+      "steps": [
+        "View footer",
+        "Verify copyright symbol and year are present",
+        "Verify company name in copyright",
+        "Verify year is current"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-090",
+      "category": "ui",
+      "priority": 1,
+      "description": "Form UI - Visual feedback on field focus",
+      "steps": [
+        "Click into form input field",
+        "Verify border or highlight appears",
+        "Tab to next field",
+        "Verify focus moves and highlights new field"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-091",
+      "category": "ui",
+      "priority": 1,
+      "description": "Form UI - Inline validation error messages",
+      "steps": [
+        "Enter invalid data in field",
+        "Blur field or submit form",
+        "Verify error message appears below/beside field",
+        "Verify error styling (red border, icon)",
+        "Fix error",
+        "Verify error message clears"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-092",
+      "category": "ui",
+      "priority": 1,
+      "description": "Form UI - Success confirmation after submission",
+      "steps": [
+        "Submit valid form",
+        "Verify success message appears",
+        "Verify success message is clearly styled (green, checkmark)",
+        "Verify message explains next steps"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-093",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form UI - Loading state during submission",
+      "steps": [
+        "Submit form",
+        "Immediately observe submit button",
+        "Verify loading spinner or text appears",
+        "Verify button is disabled during submission",
+        "Wait for completion",
+        "Verify loading state clears"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-094",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form UI - Required field indicators (asterisks)",
+      "steps": [
+        "View application form",
+        "Verify required fields have asterisk (*) or 'Required' label",
+        "Verify optional fields are clearly marked or not marked"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-095",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form UI - Progress indicator for multi-step forms",
+      "steps": [
+        "If form has multiple steps, start filling form",
+        "Verify progress bar or step indicator is shown",
+        "Complete step 1 and move to step 2",
+        "Verify progress indicator updates",
+        "Verify current step is highlighted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-096",
+      "category": "ui",
+      "priority": 1,
+      "description": "Admin dashboard UI - Data table with proper styling",
+      "steps": [
+        "Login to admin dashboard",
+        "View applicants table",
+        "Verify table headers are styled",
+        "Verify rows are clearly separated",
+        "Verify hover states on rows",
+        "Verify alternating row colors if applicable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-097",
+      "category": "ui",
+      "priority": 2,
+      "description": "Admin dashboard UI - Status badges with color coding",
+      "steps": [
+        "View applicants in dashboard",
+        "Verify status badges have distinct colors",
+        "Verify 'New' status has appropriate color (e.g., blue)",
+        "Verify 'Reviewed' status has different color",
+        "Verify colors are accessible and distinguishable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-098",
+      "category": "ui",
+      "priority": 2,
+      "description": "Admin dashboard UI - Action buttons clearly visible",
+      "steps": [
+        "View applicant details",
+        "Verify action buttons are prominent",
+        "Verify button labels are clear",
+        "Verify destructive actions (delete) are styled differently",
+        "Verify button states (hover, active, disabled)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-099",
+      "category": "ui",
+      "priority": 2,
+      "description": "Admin dashboard UI - Empty state messaging",
+      "steps": [
+        "Login to dashboard with no applicants",
+        "Verify empty state message appears",
+        "Verify message is helpful/encouraging",
+        "Verify icon or illustration enhances empty state"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-100",
+      "category": "ui",
+      "priority": 1,
+      "description": "Admin dashboard UI - Analytics cards/widgets",
+      "steps": [
+        "View admin dashboard analytics",
+        "Verify key metrics are displayed in cards",
+        "Verify card layout is clean and organized",
+        "Verify numbers are formatted properly",
+        "Verify trend indicators if applicable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-101",
+      "category": "ui",
+      "priority": 1,
+      "description": "Branding - Consistent color scheme across site",
+      "steps": [
+        "Navigate through all pages",
+        "Verify primary brand colors are used consistently",
+        "Verify button colors match brand",
+        "Verify accent colors are used appropriately",
+        "Check both light and dark modes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-102",
+      "category": "ui",
+      "priority": 2,
+      "description": "Branding - Typography consistency",
+      "steps": [
+        "Review all pages",
+        "Verify heading fonts are consistent",
+        "Verify body text uses same font family",
+        "Verify font sizes follow hierarchy",
+        "Verify line heights are readable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-103",
+      "category": "ui",
+      "priority": 2,
+      "description": "Animations - Smooth transitions between pages/states",
+      "steps": [
+        "Navigate between pages",
+        "Verify transitions are smooth",
+        "Verify no jarring jumps or flashes",
+        "Toggle dark mode",
+        "Verify theme transition is smooth"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-104",
+      "category": "ui",
+      "priority": 3,
+      "description": "Animations - Micro-interactions on buttons/links",
+      "steps": [
+        "Hover over buttons",
+        "Verify subtle hover animation",
+        "Click button",
+        "Verify click feedback animation",
+        "Verify animations are not excessive"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-105",
+      "category": "performance",
+      "priority": 1,
+      "description": "Performance - Page load time under 3 seconds (initial load)",
+      "steps": [
+        "Clear cache and cookies",
+        "Navigate to homepage",
+        "Measure page load time using dev tools",
+        "Verify load completes in under 3 seconds",
+        "Test on 3G connection simulation"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-106",
+      "category": "performance",
+      "priority": 1,
+      "description": "Performance - Time to interactive under 5 seconds",
+      "steps": [
+        "Load page with throttled connection",
+        "Measure time until page is fully interactive",
+        "Verify TTI is under 5 seconds",
+        "Verify buttons are clickable before TTI"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-107",
+      "category": "performance",
+      "priority": 2,
+      "description": "Performance - Lighthouse score above 90",
+      "steps": [
+        "Run Lighthouse audit on homepage",
+        "Verify Performance score is 90+",
+        "Run audit on application form page",
+        "Verify score is 90+",
+        "Check admin dashboard (if public)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-108",
+      "category": "performance",
+      "priority": 2,
+      "description": "Performance - Image optimization (WebP, lazy loading)",
+      "steps": [
+        "Inspect images on page",
+        "Verify images use modern formats (WebP, AVIF)",
+        "Verify lazy loading is implemented",
+        "Scroll down page",
+        "Verify images load as they enter viewport"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-109",
+      "category": "performance",
+      "priority": 2,
+      "description": "Performance - Code splitting and lazy loading of routes",
+      "steps": [
+        "Open network tab in dev tools",
+        "Load homepage",
+        "Verify only necessary JS bundles load",
+        "Navigate to different route",
+        "Verify route-specific code loads on demand"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-110",
+      "category": "performance",
+      "priority": 2,
+      "description": "Performance - Minimal JavaScript bundle size",
+      "steps": [
+        "Build production bundle",
+        "Check bundle sizes",
+        "Verify main bundle is under 200KB gzipped",
+        "Verify no duplicate dependencies",
+        "Check for tree-shaking effectiveness"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-111",
+      "category": "performance",
+      "priority": 3,
+      "description": "Performance - Caching strategy for static assets",
+      "steps": [
+        "Check response headers for static assets",
+        "Verify Cache-Control headers are set",
+        "Reload page",
+        "Verify assets load from cache",
+        "Verify cache busting on updates"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-112",
+      "category": "performance",
+      "priority": 2,
+      "description": "Performance - Database query optimization",
+      "steps": [
+        "Monitor database query times",
+        "Load applicants list with 100+ records",
+        "Verify query completes in under 1 second",
+        "Check for N+1 query issues",
+        "Verify indexes are used appropriately"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-113",
+      "category": "functional",
+      "priority": 2,
+      "description": "Error handling - 404 page for non-existent routes",
+      "steps": [
+        "Navigate to non-existent URL",
+        "Verify custom 404 page appears",
+        "Verify 404 page has helpful messaging",
+        "Verify link back to homepage",
+        "Verify consistent branding"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-114",
+      "category": "functional",
+      "priority": 2,
+      "description": "Error handling - 500 error page for server errors",
+      "steps": [
+        "Simulate server error",
+        "Verify custom error page appears",
+        "Verify error message is user-friendly",
+        "Verify error is logged for debugging",
+        "Verify recovery options are provided"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-115",
+      "category": "functional",
+      "priority": 2,
+      "description": "Error handling - Network error handling",
+      "steps": [
+        "Simulate network disconnection",
+        "Attempt to submit form",
+        "Verify network error message appears",
+        "Reconnect network",
+        "Verify ability to retry submission"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-116",
+      "category": "functional",
+      "priority": 2,
+      "description": "Error handling - Form submission error recovery",
+      "steps": [
+        "Cause form submission to fail (server error)",
+        "Verify error message appears",
+        "Verify form data is retained",
+        "Fix issue and resubmit",
+        "Verify submission succeeds without re-entering data"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-117",
+      "category": "functional",
+      "priority": 3,
+      "description": "Error handling - Global error boundary",
+      "steps": [
+        "Trigger React component error",
+        "Verify error boundary catches error",
+        "Verify fallback UI is displayed",
+        "Verify error is logged",
+        "Verify option to reload or go back"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-118",
+      "category": "functional",
+      "priority": 1,
+      "description": "SEO - Meta tags on all pages (title, description)",
+      "steps": [
+        "View page source for homepage",
+        "Verify <title> tag is present and descriptive",
+        "Verify meta description is present",
+        "Check other pages",
+        "Verify unique titles and descriptions per page"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-119",
+      "category": "functional",
+      "priority": 2,
+      "description": "SEO - Open Graph tags for social sharing",
+      "steps": [
+        "View page source",
+        "Verify og:title tag is present",
+        "Verify og:description tag is present",
+        "Verify og:image tag is present",
+        "Test URL in social media preview tool"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-120",
+      "category": "functional",
+      "priority": 2,
+      "description": "SEO - Sitemap.xml generated",
+      "steps": [
+        "Navigate to /sitemap.xml",
+        "Verify sitemap exists and loads",
+        "Verify all public pages are listed",
+        "Verify XML format is valid",
+        "Verify lastmod dates are present"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-121",
+      "category": "functional",
+      "priority": 2,
+      "description": "SEO - Robots.txt configured",
+      "steps": [
+        "Navigate to /robots.txt",
+        "Verify file exists",
+        "Verify proper allow/disallow rules",
+        "Verify sitemap URL is referenced",
+        "Verify admin routes are disallowed"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-122",
+      "category": "functional",
+      "priority": 2,
+      "description": "SEO - Structured data (JSON-LD) for organization",
+      "steps": [
+        "View page source",
+        "Verify JSON-LD script tag is present",
+        "Verify Organization schema is included",
+        "Validate with Google Structured Data Testing Tool",
+        "Verify all required fields are populated"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-123",
+      "category": "integration",
+      "priority": 1,
+      "description": "Netlify - Production deployment successful",
+      "steps": [
+        "Push code to main branch",
+        "Verify Netlify build triggers",
+        "Monitor build logs",
+        "Verify build completes successfully",
+        "Visit production URL",
+        "Verify site is live"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-124",
+      "category": "integration",
+      "priority": 1,
+      "description": "Netlify - Environment variables configured",
+      "steps": [
+        "Check Netlify dashboard",
+        "Verify all required env vars are set",
+        "Verify Supabase credentials are present",
+        "Test feature requiring env var",
+        "Verify feature works in production"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-125",
+      "category": "integration",
+      "priority": 2,
+      "description": "Netlify - Custom domain configured",
+      "steps": [
+        "Check Netlify domain settings",
+        "Verify custom domain is configured",
+        "Visit custom domain URL",
+        "Verify site loads correctly",
+        "Verify SSL certificate is active"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-126",
+      "category": "integration",
+      "priority": 2,
+      "description": "Netlify - Redirects and rewrites configured",
+      "steps": [
+        "Check _redirects or netlify.toml",
+        "Verify SPA fallback is configured",
+        "Test client-side routing in production",
+        "Refresh on dynamic route",
+        "Verify page loads correctly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-127",
+      "category": "integration",
+      "priority": 1,
+      "description": "GitHub Actions - CI/CD pipeline configured",
+      "steps": [
+        "Check .github/workflows directory",
+        "Verify workflow file exists",
+        "Push commit to trigger workflow",
+        "Monitor GitHub Actions tab",
+        "Verify workflow runs successfully"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-128",
+      "category": "integration",
+      "priority": 2,
+      "description": "GitHub Actions - Automated tests run on PR",
+      "steps": [
+        "Create pull request",
+        "Verify CI workflow triggers",
+        "Verify tests run automatically",
+        "Check test results in PR",
+        "Verify PR cannot merge if tests fail"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-129",
+      "category": "integration",
+      "priority": 2,
+      "description": "GitHub Actions - Build verification on commit",
+      "steps": [
+        "Push commit",
+        "Verify build workflow runs",
+        "Verify build completes without errors",
+        "Check for TypeScript errors",
+        "Check for linting errors"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-130",
+      "category": "integration",
+      "priority": 2,
+      "description": "GitHub Actions - Deployment preview for PRs",
+      "steps": [
+        "Create PR",
+        "Verify preview deployment is created",
+        "Click preview URL in PR",
+        "Verify preview site loads",
+        "Verify preview reflects PR changes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-131",
+      "category": "functional",
+      "priority": 1,
+      "description": "Testing - Playwright test suite configured",
+      "steps": [
+        "Check for playwright.config.ts",
+        "Verify Playwright is installed",
+        "Run npm test command",
+        "Verify tests execute",
+        "Verify test reporter shows results"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-132",
+      "category": "functional",
+      "priority": 1,
+      "description": "Testing - E2E test for form submission flow",
+      "steps": [
+        "Run Playwright tests",
+        "Verify form submission test exists",
+        "Verify test fills out form",
+        "Verify test uploads file",
+        "Verify test submits and checks success",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-133",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - E2E test for admin login flow",
+      "steps": [
+        "Run Playwright tests",
+        "Verify admin login test exists",
+        "Verify test navigates to login",
+        "Verify test enters credentials",
+        "Verify test checks dashboard access",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-134",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - E2E test for applicant filtering",
+      "steps": [
+        "Run Playwright tests",
+        "Verify filter test exists",
+        "Verify test applies filters",
+        "Verify test checks filtered results",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-135",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - E2E test for CSV export",
+      "steps": [
+        "Run Playwright tests",
+        "Verify CSV export test exists",
+        "Verify test triggers export",
+        "Verify test checks downloaded file",
+        "Verify test validates CSV content",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-136",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - E2E test for multi-language switching",
+      "steps": [
+        "Run Playwright tests",
+        "Verify language test exists",
+        "Verify test switches languages",
+        "Verify test checks translations",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-137",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - E2E test for dark mode toggle",
+      "steps": [
+        "Run Playwright tests",
+        "Verify dark mode test exists",
+        "Verify test toggles theme",
+        "Verify test checks style changes",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-138",
+      "category": "functional",
+      "priority": 3,
+      "description": "Testing - E2E test for accessibility (axe-core)",
+      "steps": [
+        "Run Playwright tests with axe",
+        "Verify accessibility test exists",
+        "Verify test scans pages for violations",
+        "Verify no critical violations found",
+        "Verify test passes"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-139",
+      "category": "functional",
+      "priority": 2,
+      "description": "Testing - Visual regression testing",
+      "steps": [
+        "Run visual regression tests",
+        "Verify screenshots are captured",
+        "Verify baseline images exist",
+        "Make UI change",
+        "Verify visual diff is detected"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-140",
+      "category": "functional",
+      "priority": 3,
+      "description": "Testing - Cross-browser testing (Chrome, Firefox, Safari)",
+      "steps": [
+        "Configure Playwright for multiple browsers",
+        "Run tests in Chrome",
+        "Run tests in Firefox",
+        "Run tests in Safari/WebKit",
+        "Verify all tests pass in all browsers"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-141",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin analytics - Total applicants count",
+      "steps": [
+        "Login to admin dashboard",
+        "Navigate to analytics section",
+        "Verify total applicants count is displayed",
+        "Submit new application",
+        "Verify count increments"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-142",
+      "category": "functional",
+      "priority": 1,
+      "description": "Admin analytics - New applicants this week/month",
+      "steps": [
+        "View analytics dashboard",
+        "Verify 'New This Week' metric is shown",
+        "Verify 'New This Month' metric is shown",
+        "Verify counts are accurate",
+        "Verify metrics update with new submissions"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-143",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Applicants by status breakdown",
+      "steps": [
+        "View analytics dashboard",
+        "Verify status breakdown chart/table",
+        "Verify counts for each status (New, Reviewed, etc.)",
+        "Update applicant status",
+        "Verify breakdown updates"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-144",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Application submission trend over time",
+      "steps": [
+        "View analytics dashboard",
+        "Verify trend chart is displayed",
+        "Verify chart shows data over time (daily, weekly, monthly)",
+        "Verify data points are accurate",
+        "Verify chart is interactive (tooltips, zoom)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-145",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Email verification rate",
+      "steps": [
+        "View analytics dashboard",
+        "Verify email verification rate metric",
+        "Verify percentage is calculated correctly",
+        "Verify chart shows verified vs unverified"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-146",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - SMS opt-in rate",
+      "steps": [
+        "View analytics dashboard",
+        "Verify SMS opt-in rate is displayed",
+        "Verify percentage calculation is correct",
+        "Verify visual representation (chart/progress bar)"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-147",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Traffic source breakdown (UTM)",
+      "steps": [
+        "View analytics dashboard",
+        "Verify traffic source chart/table",
+        "Verify different UTM sources are listed",
+        "Verify applicant counts per source",
+        "Verify conversion rate per source"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-148",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Top performing pages",
+      "steps": [
+        "View analytics dashboard",
+        "Verify page performance metrics",
+        "Verify page view counts",
+        "Verify bounce rates if applicable",
+        "Verify conversion rates by page"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-149",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Date range selector for analytics",
+      "steps": [
+        "View analytics dashboard",
+        "Locate date range selector",
+        "Select last 7 days",
+        "Verify all metrics update to reflect date range",
+        "Select custom date range",
+        "Verify metrics update accordingly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-150",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin analytics - Export analytics data to CSV",
+      "steps": [
+        "View analytics dashboard",
+        "Click export analytics button",
+        "Verify CSV downloads",
+        "Open CSV",
+        "Verify all analytics data is included"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-151",
+      "category": "ui",
+      "priority": 1,
+      "description": "Form validation UX - Real-time validation as user types",
+      "steps": [
+        "Focus on email field",
+        "Type invalid email",
+        "Verify validation runs as you type",
+        "Complete valid email",
+        "Verify validation clears immediately"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-152",
+      "category": "ui",
+      "priority": 1,
+      "description": "Form validation UX - Clear error messages",
+      "steps": [
+        "Trigger various validation errors",
+        "Verify error messages are specific and helpful",
+        "Verify messages explain how to fix the error",
+        "Verify no generic 'Invalid' messages"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-153",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form validation UX - Field-level validation icons (checkmark/error)",
+      "steps": [
+        "Fill form fields",
+        "Verify checkmark icon appears on valid fields",
+        "Trigger error",
+        "Verify error icon appears on invalid fields",
+        "Verify icons are accessible"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-154",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form validation UX - Summary of errors at form top on submit",
+      "steps": [
+        "Submit form with multiple errors",
+        "Verify error summary appears at top",
+        "Verify all errors are listed",
+        "Click error in summary",
+        "Verify focus moves to corresponding field"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-155",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form validation UX - Disabled submit button until form is valid",
+      "steps": [
+        "View form with empty required fields",
+        "Verify submit button is disabled",
+        "Fill all required fields correctly",
+        "Verify submit button becomes enabled"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-156",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form validation UX - Input masking for phone numbers",
+      "steps": [
+        "Focus on phone input",
+        "Type numbers",
+        "Verify formatting is automatically applied (e.g., (123) 456-7890)",
+        "Verify formatting updates as you type"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-157",
+      "category": "ui",
+      "priority": 3,
+      "description": "Form validation UX - Character count for text areas",
+      "steps": [
+        "If text areas have max length, focus on field",
+        "Verify character counter appears",
+        "Type text",
+        "Verify counter updates",
+        "Reach limit",
+        "Verify limit is enforced"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-158",
+      "category": "ui",
+      "priority": 2,
+      "description": "Form validation UX - Password strength indicator",
+      "steps": [
+        "If password field exists, focus on it",
+        "Verify strength indicator appears",
+        "Type weak password",
+        "Verify indicator shows weak",
+        "Type strong password",
+        "Verify indicator shows strong"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-159",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Bulk actions (update status for multiple applicants)",
+      "steps": [
+        "Login to admin dashboard",
+        "Select multiple applicants via checkboxes",
+        "Verify bulk action menu appears",
+        "Select bulk status update",
+        "Verify confirmation dialog",
+        "Confirm and verify all selected applicants update"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-160",
+      "category": "functional",
+      "priority": 2,
+      "description": "Admin dashboard - Bulk export selected applicants",
+      "steps": [
+        "Select specific applicants",
+        "Click bulk export button",
+        "Verify CSV downloads with only selected applicants",
+        "Open CSV and verify content"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-161",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Delete applicant with confirmation",
+      "steps": [
+        "View applicant details",
+        "Click delete button",
+        "Verify confirmation modal appears",
+        "Confirm deletion",
+        "Verify applicant is removed from database",
+        "Verify cannot be recovered"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-162",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Archive applicants",
+      "steps": [
+        "Select applicant",
+        "Click archive button",
+        "Verify applicant moves to archived state",
+        "Verify archived applicants not shown in main list",
+        "Access archived view",
+        "Verify applicant appears there"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-163",
+      "category": "functional",
+      "priority": 2,
+      "description": "Form - Additional fields (address, experience, availability)",
+      "steps": [
+        "View application form",
+        "Verify address field is present",
+        "Verify experience/resume summary field exists",
+        "Verify availability field exists",
+        "Fill and submit form",
+        "Verify all fields save to database"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-164",
+      "category": "functional",
+      "priority": 3,
+      "description": "Form - Job position selection dropdown",
+      "steps": [
+        "Locate position/role dropdown",
+        "Verify multiple positions are listed",
+        "Select a position",
+        "Submit form",
+        "Verify position is saved with application"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-165",
+      "category": "functional",
+      "priority": 3,
+      "description": "Form - Skills/qualifications checkboxes",
+      "steps": [
+        "Locate skills/qualifications section",
+        "Verify checkboxes for various skills",
+        "Select multiple skills",
+        "Submit form",
+        "Verify skills are saved as array/tags"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-166",
+      "category": "functional",
+      "priority": 3,
+      "description": "Form - Emergency contact information",
+      "steps": [
+        "Verify emergency contact section exists",
+        "Verify fields for name, phone, relationship",
+        "Fill emergency contact info",
+        "Submit form",
+        "Verify data saves to database"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-167",
+      "category": "functional",
+      "priority": 2,
+      "description": "Notifications - Admin email notification on new application",
+      "steps": [
+        "Submit new application",
+        "Check admin email inbox",
+        "Verify notification email received",
+        "Verify email contains applicant summary",
+        "Verify link to view applicant in dashboard"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-168",
+      "category": "functional",
+      "priority": 3,
+      "description": "Notifications - Applicant confirmation email on submission",
+      "steps": [
+        "Submit application",
+        "Check applicant email inbox",
+        "Verify confirmation email received",
+        "Verify email is branded and professional",
+        "Verify email explains next steps"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-169",
+      "category": "functional",
+      "priority": 3,
+      "description": "Notifications - Email when applicant status changes",
+      "steps": [
+        "Admin updates applicant status to 'Reviewed'",
+        "Check applicant email",
+        "Verify status change notification received",
+        "Update to 'Contacted'",
+        "Verify another notification sent"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-170",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Activity log for applicant",
+      "steps": [
+        "View applicant details",
+        "Verify activity log section exists",
+        "Verify submission timestamp is logged",
+        "Update status",
+        "Verify status change is logged with timestamp and admin name"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-171",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Applicant tagging system",
+      "steps": [
+        "View applicant details",
+        "Locate tag input",
+        "Add custom tags (e.g., 'experienced', 'urgent')",
+        "Save tags",
+        "Verify tags appear on applicant",
+        "Filter by tag",
+        "Verify filtering works"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-172",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Star/favorite applicants",
+      "steps": [
+        "View applicant in list",
+        "Click star/favorite icon",
+        "Verify applicant is marked as favorite",
+        "Filter by favorites",
+        "Verify only favorited applicants show"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-173",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin dashboard - Assign applicant to recruiter",
+      "steps": [
+        "If multi-admin system, view applicant",
+        "Locate assignment dropdown",
+        "Assign to specific recruiter",
+        "Verify assignment saves",
+        "Login as that recruiter",
+        "Verify assigned applicants are highlighted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-174",
+      "category": "functional",
+      "priority": 2,
+      "description": "Security - HTTPS enforced in production",
+      "steps": [
+        "Visit production site with http://",
+        "Verify redirect to https://",
+        "Check SSL certificate",
+        "Verify certificate is valid and trusted"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-175",
+      "category": "functional",
+      "priority": 1,
+      "description": "Security - Admin password hashing",
+      "steps": [
+        "Check database for admin user",
+        "Verify password is hashed (bcrypt/argon2)",
+        "Verify plaintext password is never stored",
+        "Verify password comparison uses secure method"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-176",
+      "category": "functional",
+      "priority": 1,
+      "description": "Security - CSRF protection on forms",
+      "steps": [
+        "Inspect form submission",
+        "Verify CSRF token is included",
+        "Attempt submission without token",
+        "Verify request is rejected"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-177",
+      "category": "functional",
+      "priority": 2,
+      "description": "Security - Rate limiting on API endpoints",
+      "steps": [
+        "Submit many requests rapidly to API",
+        "Verify rate limiting kicks in",
+        "Verify 429 Too Many Requests response",
+        "Wait for rate limit reset",
+        "Verify requests work again"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-178",
+      "category": "functional",
+      "priority": 2,
+      "description": "Security - Input sanitization to prevent XSS",
+      "steps": [
+        "Submit form with script tag in field",
+        "Verify script is sanitized/escaped",
+        "Check database",
+        "Verify malicious code is not stored raw",
+        "View applicant in dashboard",
+        "Verify script does not execute"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-179",
+      "category": "functional",
+      "priority": 2,
+      "description": "Security - SQL injection prevention",
+      "steps": [
+        "Attempt SQL injection in form fields",
+        "Verify parameterized queries prevent injection",
+        "Verify no SQL errors are exposed",
+        "Verify database is not compromised"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-180",
+      "category": "functional",
+      "priority": 3,
+      "description": "Security - Content Security Policy headers",
+      "steps": [
+        "Check HTTP response headers",
+        "Verify Content-Security-Policy header is present",
+        "Verify CSP is restrictive and appropriate",
+        "Verify inline scripts are handled correctly"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-181",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin - Multi-factor authentication (MFA) option",
+      "steps": [
+        "Login to admin",
+        "Navigate to security settings",
+        "Enable MFA",
+        "Verify QR code for authenticator app",
+        "Setup MFA",
+        "Logout and login again",
+        "Verify MFA code is required"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-182",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin - Session timeout after inactivity",
+      "steps": [
+        "Login to admin dashboard",
+        "Wait for configured timeout period (e.g., 30 minutes)",
+        "Attempt to perform action",
+        "Verify session has expired",
+        "Verify redirect to login page"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-183",
+      "category": "functional",
+      "priority": 3,
+      "description": "Admin - Audit log of admin actions",
+      "steps": [
+        "Login as admin",
+        "Perform various actions (update status, export CSV)",
+        "Navigate to audit log",
+        "Verify all actions are logged with timestamp and user",
+        "Verify log is immutable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-184",
+      "category": "functional",
+      "priority": 3,
+      "description": "Backup - Automated database backups",
+      "steps": [
+        "Check Supabase backup configuration",
+        "Verify automated backups are enabled",
+        "Verify backup schedule (daily/weekly)",
+        "Verify backup retention policy"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-185",
+      "category": "functional",
+      "priority": 3,
+      "description": "Monitoring - Error tracking integrated (Sentry, etc.)",
+      "steps": [
+        "Verify error tracking service is configured",
+        "Trigger an error",
+        "Check error tracking dashboard",
+        "Verify error is captured with stack trace",
+        "Verify source maps work for production"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-186",
+      "category": "functional",
+      "priority": 3,
+      "description": "Monitoring - Uptime monitoring configured",
+      "steps": [
+        "Verify uptime monitoring service is configured",
+        "Check monitoring dashboard",
+        "Verify site is being pinged regularly",
+        "Verify alerts are configured for downtime"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    },
+    {
+      "id": "feat-187",
+      "category": "functional",
+      "priority": 3,
+      "description": "Compliance - GDPR data export for applicants",
+      "steps": [
+        "If user data export is required, submit request as applicant",
+        "Verify request is processed",
+        "Verify all applicant data is exported",
+        "Verify export format is machine-readable"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    }
+  ]
+}
