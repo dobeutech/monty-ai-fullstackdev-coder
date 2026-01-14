@@ -1,0 +1,27 @@
+# Claude Agent Initialization Workflow
+
+When the user asks to "initialize claude agent" or "initialize the claude agent":
+
+1. **Copy this entire directory** (`E:\cursor\cursor-projects\my-agent`) to the target folder/directory where the user wants to initialize the agent
+2. **Navigate to the copied directory** in the terminal
+3. **Install dependencies**: Run `npm install` in the copied directory
+4. **Run the agent**: Execute `npm start` or `npm run agent:init` to start the initialization process
+5. **Follow the prompts**: The agent will ask for a project specification and set up the feature list
+
+## Quick Reference
+
+- Source directory: `E:\cursor\cursor-projects\my-agent`
+- Installation: `npm install`
+- Initialization: `npm start` (auto-detects) or `npm run agent:init` (force init mode)
+- Coding sessions: `npm run agent:code` (for subsequent development sessions)
+
+## Project Structure
+
+This is a Claude Agent SDK framework for long-running agents with:
+- Two-agent architecture (Initializer + Coding Agent)
+- JSON-based feature tracking
+- Browser automation testing
+- Progress persistence across sessions
+- Git integration
+
+See `README.md` for full documentation.
