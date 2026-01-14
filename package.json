@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "tsx src/index.ts",
-    "agent:init": "FORCE_INIT=true tsx src/index.ts",
+    "agent:init": "tsx src/index.ts --init",
     "agent:code": "tsx src/index.ts --code",
     "build": "tsc",
     "typecheck": "tsc --noEmit",

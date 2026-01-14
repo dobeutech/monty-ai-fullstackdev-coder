@@ -30,7 +30,19 @@ Understand recent changes and the current state of the codebase.
 - Run the init script (`./scripts/init.sh` or `.\scripts\init.ps1`)
 - Wait for the development server to start
 
-### Step 6: Verify Basic Functionality
+### Step 6: Check Backend Infrastructure (AUTONOMOUS)
+If the project uses Supabase or other backend services:
+- Check if backend credentials are configured (look for .env file)
+- If credentials exist, verify backend connectivity
+- Check for migration files (supabase/migrations/, db/migrations/, etc.)
+- If migrations exist but haven't been applied:
+  - Check if Supabase CLI is available: `supabase --version`
+  - If CLI available, attempt: `supabase db push` or `supabase migration up`
+  - If CLI not available, document which migrations need manual application
+  - Test database operations to verify setup
+- Update feature notes with backend status findings
+
+### Step 7: Verify Basic Functionality
 Before implementing anything new:
 - Use browser automation to navigate to the app
 - Verify that existing functionality still works
@@ -38,10 +50,44 @@ Before implementing anything new:
 
 ## DEVELOPMENT WORKFLOW
 
+### Backend Infrastructure Setup (AUTONOMOUS)
+When working on features that require backend services (Supabase, databases, APIs):
+
+1. **Detect Configuration**
+   - Check for .env file with backend credentials
+   - Verify credentials are valid (not placeholders)
+   - Test connection to backend service
+
+2. **Check Migrations**
+   - Look for migration files in common locations:
+     - `supabase/migrations/`
+     - `db/migrations/`
+     - `prisma/migrations/`
+     - `migrations/`
+   - If migrations exist, check if they've been applied
+
+3. **Apply Migrations (if needed)**
+   - If Supabase CLI available: `supabase db push`
+   - If Prisma: `npx prisma migrate deploy`
+   - If other tools: check project documentation
+   - If no CLI available: document required manual steps
+
+4. **Verify Setup**
+   - Test database operations (INSERT, SELECT)
+   - Test storage buckets (if applicable)
+   - Test authentication (if applicable)
+   - Update feature notes with findings
+
+5. **Handle Failures Gracefully**
+   - If migrations can't be applied automatically, document why
+   - Provide clear instructions for manual setup
+   - Don't block on infrastructure issues - work on other features if possible
+
 ### Selecting a Feature
 1. Choose ONE feature from `feature_list.json` where `passes: false`
 2. Prefer higher priority (lower number) features
 3. Consider dependencies - some features may require others first
+4. If a feature requires backend setup, handle infrastructure first (see above)
 
 ### Implementing a Feature
 1. Read the feature description and steps carefully

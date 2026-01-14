@@ -10,6 +10,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { agentConfig } from "../config/agent-config.js";
 import { getBrowserInstructions } from "../config/mcp-config.js";
+import { getSetupSummary } from "../utils/supabase-setup.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -73,6 +74,9 @@ export function buildCodingPrompt(additionalContext?: string): string {
   const progressSummary = getProgressSummary();
   const featureSummary = getFeatureSummary();
   
+  // Get Supabase setup status
+  const supabaseSummary = getSetupSummary();
+
   let prompt = `${systemPrompt}
 
 ---
@@ -100,6 +104,7 @@ CRITICAL SESSION RULES:
 ${progressSummary}
 
 **Feature Status:** ${featureSummary}
+${supabaseSummary}
 
 ## PATHS
 

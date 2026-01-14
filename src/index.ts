@@ -68,8 +68,8 @@ function parseArgs(): {
   return {
     forceInit: args.includes("--init") || process.env.FORCE_INIT === "true",
     forceCoding: args.includes("--code"),
-    spec: args.find(a => a.startsWith("--spec="))?.split("=")[1],
-    context: args.find(a => a.startsWith("--context="))?.split("=")[1],
+    spec: args.find(a => a.startsWith("--spec="))?.split("=").slice(1).join("="),
+    context: args.find(a => a.startsWith("--context="))?.split("=").slice(1).join("="),
   };
 }
 
