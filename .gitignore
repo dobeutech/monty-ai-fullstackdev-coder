@@ -6,6 +6,9 @@ dist/
 
 # Agent runtime directory (contains session-specific data)
 .agent/
+# But allow feature list and progress to be tracked (they're in .gitignore exceptions)
+!.agent/feature_list.json
+!.agent/claude-progress.txt
 
 # TypeScript cache
 *.tsbuildinfo

@@ -58,7 +58,7 @@ export function checkSupabaseConfig(): SupabaseConfig {
   return {
     url,
     anonKey,
-    configured: !!(url && anonKey && url !== "placeholder" && anonKey !== "placeholder"),
+    configured: !!(url && anonKey && url !== "https://placeholder.supabase.co" && anonKey !== "placeholder-anon-key"),
   };
 }
 

@@ -16,6 +16,14 @@ This framework solves the core challenge of long-running agents: **working effec
 - **Browser Automation Testing** - Puppeteer MCP integration for end-to-end verification
 - **Poka-yoke Safeguards** - Error prevention that blocks deletion or modification of test criteria
 - **Git Integration** - Automatic commits with descriptive messages
+- **Project Detection** - Automatically detects framework, build tools, testing setup, and technology stack
+- **Code Quality Automation** - Automated type checking, linting, and formatting validation
+- **Dependency Management** - Monitors outdated packages and security vulnerabilities
+- **Enhanced Git Utilities** - Conflict detection, branch management, and workflow guidance
+- **Error Recovery** - Checkpoint system and rollback capabilities for quick recovery
+- **Environment Validation** - Validates configuration files and environment variables
+- **System Health Monitoring** - Comprehensive health checks for project structure and dependencies
+- **Backend Infrastructure** - Autonomous Supabase setup and migration management
 
 ## Quick Start
 
@@ -49,7 +57,15 @@ my-agent/
 │   │   └── mcp-config.ts       # Puppeteer MCP settings
 │   ├── utils/
 │   │   ├── feature-list.ts     # Feature list utilities
-│   │   └── progress.ts         # Progress file utilities
+│   │   ├── progress.ts         # Progress file utilities
+│   │   ├── project-detection.ts # Project type and stack detection
+│   │   ├── code-quality.ts     # Code quality checks
+│   │   ├── dependency-management.ts # Dependency auditing
+│   │   ├── git-utils.ts        # Enhanced git operations
+│   │   ├── error-recovery.ts   # Error logging and recovery
+│   │   ├── environment-validation.ts # Environment validation
+│   │   ├── health-check.ts     # System health monitoring
+│   │   └── supabase-setup.ts   # Supabase backend setup
 │   └── index.ts                # Main entry point
 ├── templates/
 │   ├── feature_list.template.json
@@ -185,6 +201,19 @@ Based on [Anthropic's documentation](https://www.anthropic.com/engineering/effec
 | Marks features done prematurely | Browser automation required for verification |
 | Spends time figuring out setup | init.sh/init.ps1 scripts automate this |
 | Loses context between sessions | claude-progress.txt + git logs |
+
+## Best Practices Implementation
+
+This framework implements comprehensive best practices for full-stack development:
+
+- **Project Detection**: Automatically adapts to React, Next.js, Vue, and other frameworks
+- **Code Quality**: Enforces TypeScript, ESLint, and Prettier standards
+- **Security**: Monitors dependencies for vulnerabilities
+- **Git Discipline**: Conflict detection and workflow guidance
+- **Error Recovery**: Checkpoint system for rollback capability
+- **Health Monitoring**: Comprehensive system health checks
+
+See [BEST_PRACTICES.md](./BEST_PRACTICES.md) for detailed documentation.
 
 ## References
 

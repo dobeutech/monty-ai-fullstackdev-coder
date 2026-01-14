@@ -80,7 +80,7 @@ export async function runInitializerAgent(userSpec: string): Promise<void> {
         }
       }
     } else if (message.type === "result") {
-      console.log("\n━".repeat(50));
+      console.log("\n" + "━".repeat(50));
       console.log(`✅ Initialization ${message.subtype}`);
     }
   }

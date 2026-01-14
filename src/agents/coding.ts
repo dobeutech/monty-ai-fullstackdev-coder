@@ -11,6 +11,13 @@ import { fileURLToPath } from "url";
 import { agentConfig } from "../config/agent-config.js";
 import { getBrowserInstructions } from "../config/mcp-config.js";
 import { getSetupSummary } from "../utils/supabase-setup.js";
+import { generateProjectSummary } from "../utils/project-detection.js";
+import { generateQualitySummary } from "../utils/code-quality.js";
+import { generateDependencySummary } from "../utils/dependency-management.js";
+import { generateGitSummary } from "../utils/git-utils.js";
+import { generateErrorRecoverySummary } from "../utils/error-recovery.js";
+import { generateEnvironmentSummary } from "../utils/environment-validation.js";
+import { generateHealthSummary } from "../utils/health-check.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -74,8 +81,15 @@ export function buildCodingPrompt(additionalContext?: string): string {
   const progressSummary = getProgressSummary();
   const featureSummary = getFeatureSummary();
   
-  // Get Supabase setup status
+  // Get all status summaries
   const supabaseSummary = getSetupSummary();
+  const projectSummary = generateProjectSummary();
+  const qualitySummary = generateQualitySummary();
+  const dependencySummary = generateDependencySummary();
+  const gitSummary = generateGitSummary();
+  const errorRecoverySummary = generateErrorRecoverySummary();
+  const environmentSummary = generateEnvironmentSummary();
+  const healthSummary = generateHealthSummary();
 
   let prompt = `${systemPrompt}
 
@@ -105,6 +119,13 @@ ${progressSummary}
 
 **Feature Status:** ${featureSummary}
 ${supabaseSummary}
+${projectSummary}
+${qualitySummary}
+${dependencySummary}
+${gitSummary}
+${errorRecoverySummary}
+${environmentSummary}
+${healthSummary}
 
 ## PATHS
 
