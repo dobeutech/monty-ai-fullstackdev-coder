@@ -1,4 +1,6 @@
-# Claude Agent Initialization Workflow
+# Claude Agent SDK Framework - Cursor Rules
+
+## Initialization Workflow
 
 When the user asks to "initialize claude agent" or "initialize the claude agent":
 
@@ -15,13 +17,134 @@ When the user asks to "initialize claude agent" or "initialize the claude agent"
 - Initialization: `npm start` (auto-detects) or `npm run agent:init` (force init mode)
 - Coding sessions: `npm run agent:code` (for subsequent development sessions)
 
-## Project Structure
+## Core Architecture
 
-This is a Claude Agent SDK framework for long-running agents with:
-- Two-agent architecture (Initializer + Coding Agent)
-- JSON-based feature tracking
-- Browser automation testing
-- Progress persistence across sessions
-- Git integration
+This is a Claude Agent SDK framework implementing Anthropic's best practices for long-running agents with:
 
-See `README.md` for full documentation.
+### Two-Agent System
+- **Initializer Agent**: First-run setup that generates feature lists and project scaffolding
+- **Coding Agent**: Subsequent sessions that implement features incrementally with browser verification
+
+### Key Features
+- **JSON-based Feature Tracking**: Comprehensive feature list with test steps (immutable after creation)
+- **Progress Persistence**: Session logs that bridge context windows
+- **Browser Automation Testing**: Puppeteer MCP integration for end-to-end verification
+- **Poka-yoke Safeguards**: Error prevention that blocks deletion or modification of test criteria
+- **Git Integration**: Automatic commits with descriptive messages
+
+## Best Practices Implementation
+
+The framework includes comprehensive utilities implementing industry best practices:
+
+### 1. Project Detection (`src/utils/project-detection.ts`)
+- Automatically detects framework (React, Next.js, Vue, Svelte, Angular)
+- Identifies build tools (Vite, Webpack, Rollup, Turbopack)
+- Detects testing frameworks (Vitest, Jest, Playwright, Cypress)
+- Identifies backend (Supabase, Express, Fastify, Next.js API)
+- Detects database (Supabase, PostgreSQL, MySQL, MongoDB, SQLite)
+- Detects styling (Tailwind, CSS Modules, Styled Components, etc.)
+- Detects package manager (npm, yarn, pnpm, bun)
+- Monorepo detection
+
+### 2. Code Quality Automation (`src/utils/code-quality.ts`)
+- TypeScript type checking validation
+- ESLint configuration detection
+- Prettier formatting validation
+- Build script verification
+
+### 3. Dependency Management (`src/utils/dependency-management.ts`)
+- Analyzes dependencies for outdated packages
+- Detects security vulnerabilities
+- Provides update recommendations
+
+### 4. Enhanced Git Utilities (`src/utils/git-utils.ts`)
+- Merge conflict detection
+- Git status monitoring
+- Branch management hints
+- Workflow guidance
+
+### 5. Error Recovery (`src/utils/error-recovery.ts`)
+- Error logging with context
+- Checkpoint system for rollback
+- Recovery strategies
+- Error history tracking
+
+### 6. Environment Validation (`src/utils/environment-validation.ts`)
+- Validates .env file configuration
+- Detects placeholder values
+- Checks required configuration files
+
+### 7. System Health Monitoring (`src/utils/health-check.ts`)
+- Project structure validation
+- Dependency installation checks
+- Build status verification
+- Dev server monitoring
+
+### 8. Backend Infrastructure (`src/utils/supabase-setup.ts`)
+- Autonomous Supabase setup
+- Migration file discovery
+- Database connectivity verification
+
+## Agent Behavior
+
+### Coding Agent Session Startup
+At the start of each session, the agent automatically receives:
+1. Project detection summary (framework, stack, tools)
+2. Code quality status (type checking, linting, formatting)
+3. Dependency audit results (outdated packages, vulnerabilities)
+4. Git status (conflicts, uncommitted changes)
+5. Error recovery status (recent errors, checkpoints)
+6. Environment validation (configuration issues)
+7. System health check (structure, dependencies, build)
+
+### Proactive Issue Resolution
+The agent is instructed to:
+- Review all status sections first
+- Address system issues before development
+- Fix code quality issues (linting, type errors)
+- Resolve git conflicts if present
+- Install missing dependencies
+- Fix environment configuration
+- Address health check warnings
+
+## File Structure
+
+```
+src/
+├── agents/
+│   ├── initializer.ts      # First-run setup agent
+│   ├── coding.ts           # Incremental progress agent
+│   └── prompts/
+│       ├── initializer.md  # Initializer system prompt
+│       └── coding.md       # Coding agent system prompt
+├── config/
+│   ├── agent-config.ts     # Shared configuration
+│   └── mcp-config.ts       # Puppeteer MCP settings
+└── utils/
+    ├── feature-list.ts     # Feature list utilities
+    ├── progress.ts          # Progress file utilities
+    ├── project-detection.ts # Project type and stack detection
+    ├── code-quality.ts      # Code quality checks
+    ├── dependency-management.ts # Dependency auditing
+    ├── git-utils.ts         # Enhanced git operations
+    ├── error-recovery.ts    # Error logging and recovery
+    ├── environment-validation.ts # Environment validation
+    ├── health-check.ts      # System health monitoring
+    └── supabase-setup.ts    # Supabase backend setup
+```
+
+## Documentation
+
+- `README.md` - Full framework documentation
+- `BEST_PRACTICES.md` - Detailed best practices implementation guide
+- `CLAUDE.md` - Architecture and usage guide
+- `AUTONOMOUS_WORKFLOWS.md` - Autonomous workflow documentation
+
+## Usage Notes
+
+- The agent automatically adapts to detected project stacks
+- All utilities are integrated into the coding agent prompt
+- Status summaries are provided at the start of each session
+- The agent proactively addresses issues before development
+- Error recovery and checkpoint system enable quick rollback
+- Comprehensive health monitoring ensures system readiness
