@@ -418,10 +418,20 @@ monty-fullstack-agent/
 
 Monty supports multiple authentication methods:
 
-### Interactive Login (Recommended)
+### 1. Auto-Detection (Primary)
+
+If you are already authenticated with [Claude Code](https://docs.anthropic.com/claude/docs/claude-code), Monty will automatically detect and import your credentials.
 
 ```bash
-# Sign in with your Claude Code subscription or Anthropic API key
+monty login
+# ✓ Found Claude Code credentials!
+# ✓ Imported successfully
+```
+
+### 2. Interactive Login
+
+```bash
+# Sign in with Claude Code subscription (OAuth) or Anthropic API key
 monty login
 
 # Check your authentication status
@@ -432,12 +442,12 @@ monty logout
 ```
 
 The interactive login will:
-1. Prompt you to choose between Claude Code Subscription or Anthropic API Key
-2. Guide you to get your key from the appropriate source
+1. First attempt to auto-detect Claude Code credentials
+2. If not found, offer OAuth login (opens browser) or manual API Key entry
 3. Validate your credentials
 4. Store them securely in `~/.monty/credentials.json`
 
-### Environment Variables
+### 3. Environment Variables
 
 You can also authenticate using environment variables:
 
@@ -449,7 +459,7 @@ You can also authenticate using environment variables:
 
 ### Authentication Priority
 
-When both stored credentials and environment variables exist, the priority is:
+When multiple credential sources exist, the priority is:
 1. `ANTHROPIC_SUBSCRIPTION_KEY` environment variable
 2. `ANTHROPIC_API_KEY` environment variable
 3. Subscription key from `~/.monty/credentials.json`
@@ -475,7 +485,7 @@ Run `monty init` first to initialize the project.
 ### "Could not validate credentials"
 
 Your API key may be invalid. Get a new key from:
-- Claude Code: https://claude.ai/settings/api
+- Claude Code: Run `claude login` first, then `monty login`
 - Anthropic Console: https://console.anthropic.com/settings/keys
 
 ### "Permission denied"

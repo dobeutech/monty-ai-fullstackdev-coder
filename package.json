@@ -1,6 +1,6 @@
 {
   "name": "@dobeutechsolutions/monty-fullstack-agent",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Claude Agent SDK framework for autonomous full-stack development - from idea to production deployment",
   "type": "module",
   "main": "dist/index.js",
@@ -55,7 +55,8 @@
   },
   "homepage": "https://github.com/dobeutech/monty-ai-fullstackdev-coder#readme",
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.2.6"
+    "@anthropic-ai/claude-agent-sdk": "^0.2.6",
+    "open": "^11.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
