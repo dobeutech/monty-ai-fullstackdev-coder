@@ -7,7 +7,17 @@
       "Bash(git push)",
       "Bash(git rm:*)",
       "Bash(git reset:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Skill(login)",
+      "Bash(node dist/index.js:*)",
+      "Bash(node dist/cli.js:*)",
+      "Bash(npm run build:*)",
+      "Bash(node bin/cli.js login:*)",
+      "Bash(.yml)",
+      "Bash(.yaml \")",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(chmod:*)"
     ]
   }
 }

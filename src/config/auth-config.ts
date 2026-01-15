@@ -1,6 +1,6 @@
 /**
  * Authentication Configuration
- * Configuration for Claude Code Anthropic subscription authentication.
+ * Configuration for Claude subscription and Anthropic API authentication.
  *
  * Copyright (c) 2025 Dobeu Tech Solutions LLC
  * Licensed under CC BY-NC 4.0
@@ -11,24 +11,32 @@ import { homedir } from 'os';
 
 /**
  * Authentication method types
+ * - subscription: Claude.ai subscription (Pro/Max/Team/Enterprise) via OAuth
+ * - api_key: Anthropic API key from console.anthropic.com
  */
-export type AuthMethod = 'api_key' | 'subscription' | 'oauth';
+export type AuthMethod = 'api_key' | 'subscription';
+
+/**
+ * Authentication source - how credentials were obtained
+ */
+export type AuthSource = 'oauth' | 'auto-detect' | 'manual';
 
 /**
  * Subscription tier levels
  */
-export type SubscriptionTier = 'free' | 'pro' | 'team' | 'enterprise';
+export type SubscriptionTier = 'free' | 'pro' | 'max' | 'team' | 'enterprise';
 
 /**
  * User credentials interface
  */
 export interface UserCredentials {
   method: AuthMethod;
-  apiKey?: string;
-  subscriptionKey?: string;
-  accessToken?: string;
-  refreshToken?: string;
-  expiresAt?: number;
+  source?: AuthSource;
+  apiKey?: string;              // For api_key method
+  subscriptionKey?: string;     // For subscription method (OAuth token)
+  accessToken?: string;         // OAuth access token
+  refreshToken?: string;        // OAuth refresh token
+  expiresAt?: number;           // Token expiration timestamp (ms)
   userId?: string;
   email?: string;
   tier?: SubscriptionTier;
@@ -53,7 +61,7 @@ export interface AuthConfig {
   sessionPath: string;
   /** Config directory */
   configDir: string;
-  /** Anthropic OAuth endpoints (for future OAuth support) */
+  /** Claude.ai subscription OAuth endpoints */
   oauth: {
     authorizationUrl: string;
     tokenUrl: string;
@@ -61,6 +69,8 @@ export interface AuthConfig {
     redirectUri: string;
     scopes: string[];
   };
+  /** Paths to check for Claude Code credentials (auto-detection) */
+  claudeCodePaths: string[];
   /** Token validation settings */
   validation: {
     /** How often to revalidate credentials (ms) */
@@ -83,13 +93,19 @@ export const authConfig: AuthConfig = {
   sessionPath: join(configDir, 'session.json'),
   configDir,
   oauth: {
-    // Anthropic OAuth endpoints (placeholder - will be updated when available)
-    authorizationUrl: 'https://console.anthropic.com/oauth/authorize',
-    tokenUrl: 'https://console.anthropic.com/oauth/token',
+    // Claude.ai subscription OAuth endpoints
+    authorizationUrl: 'https://claude.ai/oauth/authorize',
+    tokenUrl: 'https://claude.ai/oauth/token',
     clientId: 'monty-fullstack-agent',
     redirectUri: 'http://localhost:9876/callback',
-    scopes: ['read', 'write', 'agent'],
+    scopes: ['subscription', 'agent'],
   },
+  // Claude Code credential paths for auto-detection
+  claudeCodePaths: [
+    join(homedir(), '.config', 'claude-code', 'auth.json'),  // Linux/Windows standard
+    join(homedir(), '.claude', 'credentials.json'),          // Alternative location
+    join(homedir(), '.claude', 'auth.json'),                 // Alternative location
+  ],
   validation: {
     revalidateInterval: 24 * 60 * 60 * 1000, // 24 hours
     refreshGracePeriod: 5 * 60 * 1000, // 5 minutes

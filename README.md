@@ -467,33 +467,102 @@ When multiple credential sources exist, the priority is:
 
 ## Troubleshooting
 
-### "Authentication required"
+### Authentication Issues
 
-You need to authenticate before using the agent:
+#### "Authentication required"
+
+You need to authenticate before using Monty. Choose one of these methods:
+
+**Option 1: Auto-detect (recommended)** - If you have Claude Code CLI installed:
 ```bash
-# Option 1: Interactive login (recommended)
-monty login
+# First, authenticate with Claude Code
+claude login
 
-# Option 2: Set environment variable
-export ANTHROPIC_API_KEY="your-key-here"
+# Then let Monty auto-detect your credentials
+monty login
 ```
 
-### "Feature list not found"
+**Option 2: Manual API Key**:
+```bash
+# Interactive login
+monty login
+# Select "API Key" method
+# Paste your key from console.anthropic.com
 
-Run `monty init` first to initialize the project.
+# OR set environment variable
+export ANTHROPIC_API_KEY="sk-ant-..."
+```
 
-### "Could not validate credentials"
+**Option 3: Environment Variable** (for automation/CI):
+```bash
+export ANTHROPIC_API_KEY="your-key-here"
+monty init --spec="your project"
+```
 
-Your API key may be invalid. Get a new key from:
-- Claude Code: Run `claude login` first, then `monty login`
-- Anthropic Console: https://console.anthropic.com/settings/keys
+#### "Token expired"
 
-### "Permission denied"
+Monty automatically refreshes expired tokens if you authenticated via Claude Code CLI.
+
+If auto-refresh fails, re-authenticate:
+```bash
+monty logout
+monty login
+```
+
+#### "Could not validate credentials"
+
+Your API key may be invalid or expired:
+
+1. **For Claude Code subscription**: Run `claude login` to refresh, then `monty login`
+2. **For API key**: Get a new key from [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
+3. **Check your key**: Run `monty whoami` to verify authentication status
+
+#### Debugging Authentication
+
+Check your current authentication status:
+```bash
+monty whoami
+```
+
+This command shows:
+- Authentication method (Claude subscription or API key)
+- Token expiration (if applicable)
+- Key preview (first 8 and last 4 characters)
+- Credential source (environment variable or file)
+
+If authentication is working but agents fail:
+- Verify network connectivity to api.anthropic.com
+- Check that credentials file permissions are correct:
+  - Unix/Mac: `ls -la ~/.monty/credentials.json` (should be `-rw-------`)
+  - Windows: Only current user should have access
+- Try setting API key directly: `export ANTHROPIC_API_KEY="your-key"`
+
+### Other Issues
+
+#### "Feature list not found"
+
+Run `monty init` first to initialize the project:
+```bash
+monty init --spec="Build a todo app with React"
+```
+
+#### "Permission denied"
 
 Ensure the CLI is executable:
 ```bash
+# Unix/Mac
 chmod +x $(which monty)
+
+# Windows (run as Administrator if needed)
+# No action usually required on Windows
 ```
+
+#### Agent fails to start
+
+1. Check authentication: `monty whoami`
+2. Verify Node.js version: `node --version` (must be >= 18.0.0)
+3. Check for error messages in the output
+4. Try running with explicit auth: `ANTHROPIC_API_KEY="your-key" monty code`
 
 ## Contributing
 

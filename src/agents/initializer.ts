@@ -69,6 +69,10 @@ export async function runInitializerAgent(userSpec: string): Promise<void> {
     options: {
       allowedTools: agentConfig.tools.initializer,
       permissionMode: agentConfig.permissionMode,
+      // Explicitly pass credentials to SDK subprocess
+      env: {
+        ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY || undefined,
+      },
     },
   })) {
     if (message.type === "assistant" && message.message?.content) {

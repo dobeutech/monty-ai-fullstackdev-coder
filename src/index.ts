@@ -15,7 +15,7 @@ import { existsSync, mkdirSync } from "fs";
 import { agentConfig } from "./config/agent-config.js";
 import { runInitializerAgent } from "./agents/initializer.js";
 import { runCodingAgent } from "./agents/coding.js";
-import { isAuthenticated, checkAuth, setEnvForChildProcess } from "./utils/auth-manager.js";
+import { isAuthenticated, checkAuth, setEnvForChildProcess, authManager } from "./utils/auth-manager.js";
 
 /**
  * Check if this is the first run (no .agent directory)
@@ -67,6 +67,9 @@ function parseArgs(): {
   forceCoding: boolean;
   spec: string | undefined;
   context: string | undefined;
+  login: boolean;
+  logout: boolean;
+  whoami: boolean;
 } {
   const args = process.argv.slice(2);
   
@@ -75,6 +78,9 @@ function parseArgs(): {
     forceCoding: args.includes("--code"),
     spec: args.find(a => a.startsWith("--spec="))?.split("=").slice(1).join("="),
     context: args.find(a => a.startsWith("--context="))?.split("=").slice(1).join("="),
+    login: args.includes("--login"),
+    logout: args.includes("--logout"),
+    whoami: args.includes("--whoami"),
   };
 }
 
@@ -128,7 +134,26 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
-  // Check authentication
+  // Handle authentication commands FIRST (before auth check)
+  if (args.login) {
+    const { authManager } = await import("./utils/auth-manager.js");
+    const success = await authManager.login();
+    process.exit(success ? 0 : 1);
+  }
+
+  if (args.logout) {
+    const { authManager } = await import("./utils/auth-manager.js");
+    authManager.logout();
+    process.exit(0);
+  }
+
+  if (args.whoami) {
+    const { authManager } = await import("./utils/auth-manager.js");
+    authManager.whoami();
+    process.exit(0);
+  }
+
+  // Check authentication for other commands
   const authStatus = checkAuth();
   if (!authStatus.authenticated) {
     console.log(`
@@ -142,6 +167,19 @@ To authenticate, choose one of:
   1. Run: monty login
   2. Set environment variable: export ANTHROPIC_API_KEY=your-key
   3. Set environment variable: export ANTHROPIC_SUBSCRIPTION_KEY=your-key
+`);
+    process.exit(1);
+  }
+
+  // Validate authentication before proceeding (async to handle token refresh)
+  const apiKey = await authManager.getApiKey();
+  if (!apiKey) {
+    console.error(`
+❌ No valid authentication found.
+
+Please authenticate using one of these methods:
+  1. Run: monty login
+  2. Set environment variable: export ANTHROPIC_API_KEY="your-key"
 `);
     process.exit(1);
   }
