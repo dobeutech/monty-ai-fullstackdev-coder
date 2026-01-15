@@ -29,6 +29,7 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+.npmrc
 
 # Test coverage
 coverage/
