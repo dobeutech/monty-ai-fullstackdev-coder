@@ -13,7 +13,7 @@ Based on [Anthropic's best practices](https://www.anthropic.com/engineering/effe
 ### Prerequisites
 
 - **Node.js** >= 18.0.0
-- **Anthropic API Key** - Get one at [console.anthropic.com](https://console.anthropic.com)
+- **Claude Code Subscription** or **Anthropic API Key** - Sign in with `monty login` or get a key at [console.anthropic.com](https://console.anthropic.com)
 
 ### Windows Installation
 
@@ -25,14 +25,14 @@ winget install OpenJS.NodeJS.LTS
 # 2. Install Monty globally
 npm install -g monty-fullstack-agent
 
-# 3. Set API key (PowerShell - current session)
+# 3. Authenticate (RECOMMENDED - interactive login)
+monty login
+
+# 3b. Or set API key manually (PowerShell - current session)
 $env:ANTHROPIC_API_KEY="your-api-key-here"
 
-# 3b. Set API key permanently (PowerShell - persistent)
+# 3c. Or set API key permanently (PowerShell - persistent)
 [Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "your-api-key-here", "User")
-
-# 3c. Or use Command Prompt (current session)
-set ANTHROPIC_API_KEY=your-api-key-here
 
 # 4. Verify installation
 monty --help
@@ -50,10 +50,13 @@ brew install node
 # 2. Install Monty globally
 npm install -g monty-fullstack-agent
 
-# 3. Set API key (current session)
+# 3. Authenticate (RECOMMENDED - interactive login)
+monty login
+
+# 3b. Or set API key manually (current session)
 export ANTHROPIC_API_KEY="your-api-key-here"
 
-# 3b. Set API key permanently (add to ~/.zshrc or ~/.bash_profile)
+# 3c. Or set API key permanently (add to ~/.zshrc or ~/.bash_profile)
 echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.zshrc
 source ~/.zshrc
 
@@ -83,10 +86,13 @@ nvm use 20
 # 2. Install Monty globally
 npm install -g monty-fullstack-agent
 
-# 3. Set API key (current session)
+# 3. Authenticate (RECOMMENDED - interactive login)
+monty login
+
+# 3b. Or set API key manually (current session)
 export ANTHROPIC_API_KEY="your-api-key-here"
 
-# 3b. Set API key permanently (add to ~/.bashrc or ~/.zshrc)
+# 3c. Or set API key permanently (add to ~/.bashrc or ~/.zshrc)
 echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.bashrc
 source ~/.bashrc
 
@@ -185,6 +191,14 @@ monty code --context="Focus on fixing the login bug in auth.ts"
 | `monty status` | Show project progress and feature status |
 | `monty setup` | Set up Monty in current directory |
 | `monty --help` | Show detailed help |
+
+### Authentication Commands
+
+| Command | Description |
+|---------|-------------|
+| `monty login` | Sign in with Claude Code subscription or Anthropic API key |
+| `monty logout` | Sign out and clear stored credentials |
+| `monty whoami` | Show current authentication status |
 
 ### Options
 
@@ -400,25 +414,69 @@ monty-fullstack-agent/
 └── scripts/                   # Init scripts
 ```
 
-## Environment Variables
+## Authentication
+
+Monty supports multiple authentication methods:
+
+### Interactive Login (Recommended)
+
+```bash
+# Sign in with your Claude Code subscription or Anthropic API key
+monty login
+
+# Check your authentication status
+monty whoami
+
+# Sign out when needed
+monty logout
+```
+
+The interactive login will:
+1. Prompt you to choose between Claude Code Subscription or Anthropic API Key
+2. Guide you to get your key from the appropriate source
+3. Validate your credentials
+4. Store them securely in `~/.monty/credentials.json`
+
+### Environment Variables
+
+You can also authenticate using environment variables:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `ANTHROPIC_API_KEY` | Your Claude API key | Yes |
+| `ANTHROPIC_API_KEY` | Anthropic API key | No (if using login) |
+| `ANTHROPIC_SUBSCRIPTION_KEY` | Claude Code subscription key | No (if using login) |
 | `FORCE_INIT` | Force initialization mode | No |
 
+### Authentication Priority
+
+When both stored credentials and environment variables exist, the priority is:
+1. `ANTHROPIC_SUBSCRIPTION_KEY` environment variable
+2. `ANTHROPIC_API_KEY` environment variable
+3. Subscription key from `~/.monty/credentials.json`
+4. API key from `~/.monty/credentials.json`
+
 ## Troubleshooting
+
+### "Authentication required"
+
+You need to authenticate before using the agent:
+```bash
+# Option 1: Interactive login (recommended)
+monty login
+
+# Option 2: Set environment variable
+export ANTHROPIC_API_KEY="your-key-here"
+```
 
 ### "Feature list not found"
 
 Run `monty init` first to initialize the project.
 
-### "ANTHROPIC_API_KEY not set"
+### "Could not validate credentials"
 
-Set your API key:
-```bash
-export ANTHROPIC_API_KEY="your-key-here"
-```
+Your API key may be invalid. Get a new key from:
+- Claude Code: https://claude.ai/settings/api
+- Anthropic Console: https://console.anthropic.com/settings/keys
 
 ### "Permission denied"
 
