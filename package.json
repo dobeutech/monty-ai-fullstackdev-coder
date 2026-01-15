@@ -1,6 +1,6 @@
 {
   "name": "@dobeutechsolutions/monty-fullstack-agent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Claude Agent SDK framework for autonomous full-stack development - from idea to production deployment",
   "type": "module",
   "main": "dist/index.js",
