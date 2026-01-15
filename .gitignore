@@ -35,3 +35,4 @@ coverage/
 
 # Claude Code temp files
 tmpclaude-*
+*.tgz
