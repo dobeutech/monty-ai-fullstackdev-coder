@@ -1,5 +1,5 @@
 {
-  "name": "monty-fullstack-agent",
+  "name": "@dobeutechsolutions/monty-fullstack-agent",
   "version": "1.0.0",
   "description": "Claude Agent SDK framework for autonomous full-stack development - from idea to production deployment",
   "type": "module",
@@ -16,7 +16,7 @@
     "agent:init": "node dist/index.js --init",
     "agent:code": "node dist/index.js --code",
     "build": "tsc && npm run copy-assets",
-    "copy-assets": "cp -r src/agents/prompts dist/agents/ && cp -r templates dist/",
+    "copy-assets": "shx mkdir -p dist/agents && shx cp -r src/agents/prompts dist/agents/ && shx cp -r templates dist/",
     "typecheck": "tsc --noEmit",
     "test": "echo \"Tests would run here\"",
     "clean": "rm -rf dist .agent",
@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
+    "shx": "^0.4.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.0"
   },

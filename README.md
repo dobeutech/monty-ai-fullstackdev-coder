@@ -1,8 +1,8 @@
 # Monty Full-Stack Agent
 
-[![npm version](https://img.shields.io/npm/v/monty-fullstack-agent.svg)](https://www.npmjs.com/package/monty-fullstack-agent)
+[![npm version](https://img.shields.io/npm/v/@dobeutechsolutions/monty-fullstack-agent.svg)](https://www.npmjs.com/package/@dobeutechsolutions/monty-fullstack-agent)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
-[![Node.js Version](https://img.shields.io/node/v/monty-fullstack-agent.svg)](https://nodejs.org)
+[![Node.js Version](https://img.shields.io/node/v/@dobeutechsolutions/monty-fullstack-agent.svg)](https://nodejs.org)
 
 An autonomous full-stack development agent powered by the Claude Agent SDK. Takes your project from **idea to production** with incremental progress tracking across multiple sessions.
 
@@ -23,7 +23,7 @@ Based on [Anthropic's best practices](https://www.anthropic.com/engineering/effe
 winget install OpenJS.NodeJS.LTS
 
 # 2. Install Monty globally
-npm install -g monty-fullstack-agent
+npm install -g @dobeutechsolutions/monty-fullstack-agent
 
 # 3. Authenticate (RECOMMENDED - interactive login)
 monty login
@@ -48,7 +48,7 @@ brew install node
 # Or download from https://nodejs.org
 
 # 2. Install Monty globally
-npm install -g monty-fullstack-agent
+npm install -g @dobeutechsolutions/monty-fullstack-agent
 
 # 3. Authenticate (RECOMMENDED - interactive login)
 monty login
@@ -84,7 +84,7 @@ nvm install 20
 nvm use 20
 
 # 2. Install Monty globally
-npm install -g monty-fullstack-agent
+npm install -g @dobeutechsolutions/monty-fullstack-agent
 
 # 3. Authenticate (RECOMMENDED - interactive login)
 monty login
@@ -104,20 +104,20 @@ monty --help
 
 ```bash
 # Works on all platforms - no installation needed
-npx monty-fullstack-agent --help
+npx @dobeutechsolutions/monty-fullstack-agent --help
 
 # Initialize a new project
-npx monty-fullstack-agent init --spec="Build a todo app with React and Supabase"
+npx @dobeutechsolutions/monty-fullstack-agent init --spec="Build a todo app with React and Supabase"
 
 # Continue development
-npx monty-fullstack-agent code
+npx @dobeutechsolutions/monty-fullstack-agent code
 ```
 
 ### Project-Level Installation
 
 ```bash
 # Add to an existing project
-npm install --save-dev monty-fullstack-agent
+npm install --save-dev @dobeutechsolutions/monty-fullstack-agent
 
 # Add scripts to package.json:
 # "scripts": {
@@ -130,13 +130,13 @@ npm install --save-dev monty-fullstack-agent
 
 ```bash
 # Yarn
-yarn global add monty-fullstack-agent
+yarn global add @dobeutechsolutions/monty-fullstack-agent
 
 # pnpm
-pnpm add -g monty-fullstack-agent
+pnpm add -g @dobeutechsolutions/monty-fullstack-agent
 
 # Bun
-bun add -g monty-fullstack-agent
+bun add -g @dobeutechsolutions/monty-fullstack-agent
 ```
 
 ## Quick Start
