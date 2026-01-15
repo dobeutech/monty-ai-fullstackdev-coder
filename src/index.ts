@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 /**
- * Long-Running Agent Framework
+ * Monty Full-Stack Agent Framework
  * Main entry point that routes between initializer and coding agents.
- * 
+ *
+ * Copyright (c) 2025 Dobeu Tech Solutions LLC
+ * Licensed under CC BY-NC 4.0 - Non-commercial use only
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ *
  * Based on Anthropic's best practices for effective agent harnesses:
  * https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
  */
@@ -11,6 +15,7 @@ import { existsSync, mkdirSync } from "fs";
 import { agentConfig } from "./config/agent-config.js";
 import { runInitializerAgent } from "./agents/initializer.js";
 import { runCodingAgent } from "./agents/coding.js";
+import { isAuthenticated, checkAuth, setEnvForChildProcess } from "./utils/auth-manager.js";
 
 /**
  * Check if this is the first run (no .agent directory)
@@ -116,13 +121,34 @@ FILES:
  */
 async function main(): Promise<void> {
   const args = parseArgs();
-  
+
   // Show help if requested
   if (process.argv.includes("--help") || process.argv.includes("-h")) {
     showUsage();
     process.exit(0);
   }
-  
+
+  // Check authentication
+  const authStatus = checkAuth();
+  if (!authStatus.authenticated) {
+    console.log(`
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         AUTHENTICATION REQUIRED                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+${authStatus.message}
+
+To authenticate, choose one of:
+  1. Run: monty login
+  2. Set environment variable: export ANTHROPIC_API_KEY=your-key
+  3. Set environment variable: export ANTHROPIC_SUBSCRIPTION_KEY=your-key
+`);
+    process.exit(1);
+  }
+
+  // Ensure API key is set in environment for SDK
+  setEnvForChildProcess();
+
   console.log(`
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                    LONG-RUNNING AGENT FRAMEWORK                              ║
@@ -163,7 +189,7 @@ For now, please describe what you want to build:
         mkdirSync(agentConfig.paths.agentDir, { recursive: true });
       }
       
-      await runWithRetry(() => runInitializerAgent(args.spec));
+      await runWithRetry(() => runInitializerAgent(args.spec!));
     }
   } else {
     // Coding mode

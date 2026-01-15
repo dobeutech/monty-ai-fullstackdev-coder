@@ -4,38 +4,67 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A Claude Agent SDK framework implementing Anthropic's best practices for long-running agents. The framework uses a two-agent architecture to enable incremental development across multiple context windows:
+**Monty Full-Stack Agent** - A Claude Agent SDK framework implementing Anthropic's best practices for long-running agents. The framework uses a two-agent architecture to enable incremental development across multiple context windows.
 
-1. **Initializer Agent** - First-run setup that generates feature lists and project scaffolding
-2. **Coding Agent** - Subsequent sessions that implement features incrementally with browser verification
+### Key Capabilities
+- Takes projects from **idea to production deployment**
+- Works with **any codebase at any development stage**
+- **Auto-detects** tech stack (React, Next.js, Vue, Supabase, etc.)
+- **Incremental progress** tracking across sessions
+- **Browser automation** for end-to-end testing
 
-## Commands
+## Installation & Usage
+
+### As Global CLI (npm package)
+
+```bash
+# Install globally
+npm install -g monty-fullstack-agent
+
+# Or run directly with npx
+npx monty-fullstack-agent --help
+
+# Initialize a project
+monty init --spec="Build a todo app with React and Supabase"
+
+# Continue development
+monty code
+
+# Check status
+monty status
+```
+
+### Development Mode
 
 ```bash
 # Install dependencies
 npm install
 
-# Run (auto-detects mode based on .agent directory existence)
-npm start
-
-# Force initialization mode
-npm run agent:init
-
-# Force coding mode (incremental development)
-npm run agent:code
-
-# Provide project spec directly
-npm start -- --spec="Build a todo app with React..."
-
-# Add context to coding session
-npm run agent:code -- --context="Focus on the login feature"
-
-# Type checking
-npm run typecheck
+# Run in development mode
+npm run dev
 
 # Build TypeScript
 npm run build
+
+# Type checking
+npm run typecheck
 ```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `monty init` | Initialize project with feature list |
+| `monty code` | Continue incremental development |
+| `monty status` | Show project progress |
+| `monty --help` | Show usage information |
+
+### CLI Options
+
+- `--spec="..."` - Project specification for initializer
+- `--context="..."` - Additional context for coding session
+- `--init` - Force initialization mode
+- `--code` - Force coding mode
 
 ## Architecture
 
@@ -45,6 +74,7 @@ The framework routes between agents based on state:
 - `src/index.ts` - Entry point that checks for `.agent/` directory to determine mode
 - `src/agents/initializer.ts` - Creates feature list, progress file, and init scripts
 - `src/agents/coding.ts` - Reads progress, selects features, implements, tests via browser
+- `bin/cli.js` - CLI wrapper for global/npx usage
 
 ### System Prompts
 
@@ -65,8 +95,11 @@ Created during initialization, consumed by coding agent:
 
 ### Utilities
 
-- `src/utils/feature-list.ts` - Feature CRUD with Poka-yoke validation (prevents deletion/modification of test criteria)
+- `src/utils/feature-list.ts` - Feature CRUD with Poka-yoke validation
 - `src/utils/progress.ts` - Progress file management and session logging
+- `src/utils/project-detection.ts` - Auto-detects frameworks and tech stack
+- `src/utils/code-quality.ts` - TypeScript, ESLint, Prettier checks
+- `src/utils/health-check.ts` - System health monitoring
 
 ## Feature List Schema
 
@@ -98,3 +131,14 @@ The framework enforces these rules to prevent common agent failures:
 - Tools are configured per agent type (initializer uses Write, coding uses Edit)
 - Permission mode is `acceptEdits` by default
 - Retry logic with exponential backoff handles transient failures
+
+## Publishing
+
+```bash
+# Build and publish to npm
+npm run build
+npm publish
+
+# Or use GitHub Actions workflow
+# Push a release tag to trigger automatic publishing
+```

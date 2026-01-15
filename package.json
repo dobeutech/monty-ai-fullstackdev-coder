@@ -1,21 +1,29 @@
 {
-  "name": "long-running-agent-framework",
+  "name": "monty-fullstack-agent",
   "version": "1.0.0",
-  "description": "Claude Agent SDK framework for long-running development work with incremental progress tracking",
+  "description": "Claude Agent SDK framework for autonomous full-stack development - from idea to production deployment",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
-    "agent": "./src/index.ts"
+    "monty": "./bin/cli.js",
+    "monty-agent": "./bin/cli.js",
+    "fullstack-agent": "./bin/cli.js"
   },
   "scripts": {
-    "start": "tsx src/index.ts",
-    "agent:init": "tsx src/index.ts --init",
-    "agent:code": "tsx src/index.ts --code",
-    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "agent:init": "node dist/index.js --init",
+    "agent:code": "node dist/index.js --code",
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "cp -r src/agents/prompts dist/agents/ && cp -r templates dist/",
     "typecheck": "tsc --noEmit",
     "test": "echo \"Tests would run here\"",
     "clean": "rm -rf dist .agent",
-    "help": "tsx src/index.ts --help"
+    "help": "node dist/index.js --help",
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
+    "postinstall": "echo '✅ monty-fullstack-agent installed! Run: monty --help'"
   },
   "keywords": [
     "claude",
@@ -23,11 +31,29 @@
     "ai",
     "anthropic",
     "sdk",
+    "fullstack",
+    "developer",
+    "autonomous",
+    "code-generation",
+    "web-development",
+    "react",
+    "nextjs",
+    "typescript",
+    "production",
+    "deployment",
     "long-running",
     "incremental"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "Dobeu Tech Solutions LLC",
+  "license": "CC-BY-NC-4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dobeutech/monty-ai-fullstackdev-coder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dobeutech/monty-ai-fullstackdev-coder/issues"
+  },
+  "homepage": "https://github.com/dobeutech/monty-ai-fullstackdev-coder#readme",
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.2.6"
   },
@@ -38,5 +64,16 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "templates",
+    "scripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
