@@ -10,23 +10,94 @@ Based on [Anthropic's best practices](https://www.anthropic.com/engineering/effe
 
 ## Installation
 
-### Global Installation (Recommended)
+### Prerequisites
 
-```bash
-# Install globally via npm
+- **Node.js** >= 18.0.0
+- **Anthropic API Key** - Get one at [console.anthropic.com](https://console.anthropic.com)
+
+### Windows Installation
+
+```powershell
+# 1. Install Node.js (if not installed)
+# Download from https://nodejs.org or use winget:
+winget install OpenJS.NodeJS.LTS
+
+# 2. Install Monty globally
 npm install -g monty-fullstack-agent
 
-# Or via yarn
-yarn global add monty-fullstack-agent
+# 3. Set API key (PowerShell - current session)
+$env:ANTHROPIC_API_KEY="your-api-key-here"
 
-# Or via pnpm
-pnpm add -g monty-fullstack-agent
+# 3b. Set API key permanently (PowerShell - persistent)
+[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "your-api-key-here", "User")
+
+# 3c. Or use Command Prompt (current session)
+set ANTHROPIC_API_KEY=your-api-key-here
+
+# 4. Verify installation
+monty --help
 ```
 
-### Run Directly with npx
+### macOS Installation
 
 ```bash
-# No installation needed - run directly
+# 1. Install Node.js (if not installed)
+# Using Homebrew (recommended):
+brew install node
+
+# Or download from https://nodejs.org
+
+# 2. Install Monty globally
+npm install -g monty-fullstack-agent
+
+# 3. Set API key (current session)
+export ANTHROPIC_API_KEY="your-api-key-here"
+
+# 3b. Set API key permanently (add to ~/.zshrc or ~/.bash_profile)
+echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.zshrc
+source ~/.zshrc
+
+# 4. Verify installation
+monty --help
+```
+
+### Linux Installation
+
+```bash
+# 1. Install Node.js (if not installed)
+# Ubuntu/Debian:
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Fedora/RHEL:
+sudo dnf install nodejs
+
+# Arch Linux:
+sudo pacman -S nodejs npm
+
+# Or use nvm (all distros):
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+nvm install 20
+nvm use 20
+
+# 2. Install Monty globally
+npm install -g monty-fullstack-agent
+
+# 3. Set API key (current session)
+export ANTHROPIC_API_KEY="your-api-key-here"
+
+# 3b. Set API key permanently (add to ~/.bashrc or ~/.zshrc)
+echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.bashrc
+source ~/.bashrc
+
+# 4. Verify installation
+monty --help
+```
+
+### Run Directly with npx (No Install)
+
+```bash
+# Works on all platforms - no installation needed
 npx monty-fullstack-agent --help
 
 # Initialize a new project
@@ -42,20 +113,24 @@ npx monty-fullstack-agent code
 # Add to an existing project
 npm install --save-dev monty-fullstack-agent
 
-# Add scripts to package.json
+# Add scripts to package.json:
 # "scripts": {
 #   "agent:init": "monty init",
 #   "agent:code": "monty code"
 # }
 ```
 
-## Requirements
-
-- **Node.js** >= 18.0.0
-- **Anthropic API Key** - Set `ANTHROPIC_API_KEY` environment variable
+### Alternative Package Managers
 
 ```bash
-export ANTHROPIC_API_KEY="your-api-key-here"
+# Yarn
+yarn global add monty-fullstack-agent
+
+# pnpm
+pnpm add -g monty-fullstack-agent
+
+# Bun
+bun add -g monty-fullstack-agent
 ```
 
 ## Quick Start
@@ -381,12 +456,16 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial 
 - **Attribution** - You must give appropriate credit to Dobeu Tech Solutions LLC
 - **NonCommercial** - You may not use the material for commercial purposes
 
-For commercial licensing, please contact [Dobeu Tech Solutions LLC](https://github.com/dobeutech).
+**For commercial licensing:**
+- Email: jeremyw@dobeu.net
+- Website: [dobeu.net](https://dobeu.net)
+- Terms of Service: [dobeu.net/tos](https://dobeu.net/tos)
+- Privacy Policy: [dobeu.net/privacy](https://dobeu.net/privacy)
 
 See [LICENSE](LICENSE) for full details.
 
 ---
 
-Copyright (c) 2025 **Dobeu Tech Solutions LLC** - All Rights Reserved
+Copyright (c) 2025 **[Dobeu Tech Solutions LLC](https://dobeu.net)** - All Rights Reserved
 
 Made with Claude Agent SDK
