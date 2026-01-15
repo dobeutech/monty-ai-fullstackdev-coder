@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 /**
- * Long-Running Agent Framework
+ * Monty Full-Stack Agent Framework
  * Main entry point that routes between initializer and coding agents.
- * 
+ *
+ * Copyright (c) 2025 Dobeu Tech Solutions LLC
+ * Licensed under CC BY-NC 4.0 - Non-commercial use only
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ *
  * Based on Anthropic's best practices for effective agent harnesses:
  * https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
  */
@@ -163,7 +167,7 @@ For now, please describe what you want to build:
         mkdirSync(agentConfig.paths.agentDir, { recursive: true });
       }
       
-      await runWithRetry(() => runInitializerAgent(args.spec));
+      await runWithRetry(() => runInitializerAgent(args.spec!));
     }
   } else {
     // Coding mode

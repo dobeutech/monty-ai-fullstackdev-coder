@@ -102,7 +102,7 @@ export function findMigrationFiles(): MigrationFile[] {
 function extractTimestamp(filename: string): string {
   // Match patterns like: 20251119020909_*.sql or 20251119020909.sql
   const match = filename.match(/^(\d{14})/);
-  return match ? match[1] : filename;
+  return match?.[1] ?? filename;
 }
 
 /**

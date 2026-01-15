@@ -1,130 +1,304 @@
-# Long-Running Agent Framework
+# Monty Full-Stack Agent
 
-A Claude Agent SDK framework implementing [Anthropic's best practices](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) for long-running agents with incremental progress tracking.
+[![npm version](https://img.shields.io/npm/v/monty-fullstack-agent.svg)](https://www.npmjs.com/package/monty-fullstack-agent)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![Node.js Version](https://img.shields.io/node/v/monty-fullstack-agent.svg)](https://nodejs.org)
 
-## Overview
+An autonomous full-stack development agent powered by the Claude Agent SDK. Takes your project from **idea to production** with incremental progress tracking across multiple sessions.
 
-This framework solves the core challenge of long-running agents: **working effectively across multiple context windows**. It implements a two-agent architecture:
+Based on [Anthropic's best practices](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) for long-running agents.
 
-1. **Initializer Agent** - Sets up the project environment on first run
-2. **Coding Agent** - Makes incremental progress in every subsequent session
+## Installation
 
-## Key Features
+### Prerequisites
 
-- **JSON-based Feature Tracking** - Comprehensive feature list with test steps (less prone to accidental modification than Markdown)
-- **Progress Persistence** - Session logs that bridge context windows
-- **Browser Automation Testing** - Puppeteer MCP integration for end-to-end verification
-- **Poka-yoke Safeguards** - Error prevention that blocks deletion or modification of test criteria
-- **Git Integration** - Automatic commits with descriptive messages
-- **Project Detection** - Automatically detects framework, build tools, testing setup, and technology stack
-- **Code Quality Automation** - Automated type checking, linting, and formatting validation
-- **Dependency Management** - Monitors outdated packages and security vulnerabilities
-- **Enhanced Git Utilities** - Conflict detection, branch management, and workflow guidance
-- **Error Recovery** - Checkpoint system and rollback capabilities for quick recovery
-- **Environment Validation** - Validates configuration files and environment variables
-- **System Health Monitoring** - Comprehensive health checks for project structure and dependencies
-- **Backend Infrastructure** - Autonomous Supabase setup and migration management
+- **Node.js** >= 18.0.0
+- **Anthropic API Key** - Get one at [console.anthropic.com](https://console.anthropic.com)
+
+### Windows Installation
+
+```powershell
+# 1. Install Node.js (if not installed)
+# Download from https://nodejs.org or use winget:
+winget install OpenJS.NodeJS.LTS
+
+# 2. Install Monty globally
+npm install -g monty-fullstack-agent
+
+# 3. Set API key (PowerShell - current session)
+$env:ANTHROPIC_API_KEY="your-api-key-here"
+
+# 3b. Set API key permanently (PowerShell - persistent)
+[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "your-api-key-here", "User")
+
+# 3c. Or use Command Prompt (current session)
+set ANTHROPIC_API_KEY=your-api-key-here
+
+# 4. Verify installation
+monty --help
+```
+
+### macOS Installation
+
+```bash
+# 1. Install Node.js (if not installed)
+# Using Homebrew (recommended):
+brew install node
+
+# Or download from https://nodejs.org
+
+# 2. Install Monty globally
+npm install -g monty-fullstack-agent
+
+# 3. Set API key (current session)
+export ANTHROPIC_API_KEY="your-api-key-here"
+
+# 3b. Set API key permanently (add to ~/.zshrc or ~/.bash_profile)
+echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.zshrc
+source ~/.zshrc
+
+# 4. Verify installation
+monty --help
+```
+
+### Linux Installation
+
+```bash
+# 1. Install Node.js (if not installed)
+# Ubuntu/Debian:
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Fedora/RHEL:
+sudo dnf install nodejs
+
+# Arch Linux:
+sudo pacman -S nodejs npm
+
+# Or use nvm (all distros):
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+nvm install 20
+nvm use 20
+
+# 2. Install Monty globally
+npm install -g monty-fullstack-agent
+
+# 3. Set API key (current session)
+export ANTHROPIC_API_KEY="your-api-key-here"
+
+# 3b. Set API key permanently (add to ~/.bashrc or ~/.zshrc)
+echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.bashrc
+source ~/.bashrc
+
+# 4. Verify installation
+monty --help
+```
+
+### Run Directly with npx (No Install)
+
+```bash
+# Works on all platforms - no installation needed
+npx monty-fullstack-agent --help
+
+# Initialize a new project
+npx monty-fullstack-agent init --spec="Build a todo app with React and Supabase"
+
+# Continue development
+npx monty-fullstack-agent code
+```
+
+### Project-Level Installation
+
+```bash
+# Add to an existing project
+npm install --save-dev monty-fullstack-agent
+
+# Add scripts to package.json:
+# "scripts": {
+#   "agent:init": "monty init",
+#   "agent:code": "monty code"
+# }
+```
+
+### Alternative Package Managers
+
+```bash
+# Yarn
+yarn global add monty-fullstack-agent
+
+# pnpm
+pnpm add -g monty-fullstack-agent
+
+# Bun
+bun add -g monty-fullstack-agent
+```
 
 ## Quick Start
 
+### Starting a New Project
+
 ```bash
-# Install dependencies
-npm install
+# Create a new directory
+mkdir my-awesome-app && cd my-awesome-app
 
-# Run initialization (first time)
-npm start
+# Initialize with your idea
+monty init --spec="Build a modern todo app with React, TypeScript, Tailwind CSS, and Supabase backend. Include user authentication, real-time updates, and dark mode."
 
-# Or force initialization mode
-npm run agent:init
-
-# Run coding agent (subsequent sessions)
-npm run agent:code
+# Continue development
+monty code
 ```
 
-## Project Structure
+### Using with an Existing Codebase
 
+```bash
+# Navigate to your existing project
+cd your-existing-project
+
+# Initialize Monty (it will detect your tech stack)
+monty init --spec="Complete the authentication system and add user dashboard"
+
+# The agent will analyze your codebase and create a feature list
+# Continue with incremental development
+monty code
 ```
-my-agent/
-├── src/
-│   ├── agents/
-│   │   ├── initializer.ts      # First-run setup agent
-│   │   ├── coding.ts           # Incremental progress agent
-│   │   └── prompts/
-│   │       ├── initializer.md  # Initializer system prompt
-│   │       └── coding.md       # Coding agent system prompt
-│   ├── config/
-│   │   ├── agent-config.ts     # Shared configuration
-│   │   └── mcp-config.ts       # Puppeteer MCP settings
-│   ├── utils/
-│   │   ├── feature-list.ts     # Feature list utilities
-│   │   ├── progress.ts         # Progress file utilities
-│   │   ├── project-detection.ts # Project type and stack detection
-│   │   ├── code-quality.ts     # Code quality checks
-│   │   ├── dependency-management.ts # Dependency auditing
-│   │   ├── git-utils.ts        # Enhanced git operations
-│   │   ├── error-recovery.ts   # Error logging and recovery
-│   │   ├── environment-validation.ts # Environment validation
-│   │   ├── health-check.ts     # System health monitoring
-│   │   └── supabase-setup.ts   # Supabase backend setup
-│   └── index.ts                # Main entry point
-├── templates/
-│   ├── feature_list.template.json
-│   └── progress.template.txt
-├── scripts/
-│   ├── init.sh                 # Unix setup script
-│   └── init.ps1                # Windows setup script
-└── .agent/                     # Runtime directory (created automatically)
-    ├── feature_list.json       # Feature tracking
-    └── claude-progress.txt     # Session progress log
+
+### Resuming Work
+
+```bash
+# Check project status
+monty status
+
+# Continue where you left off
+monty code
+
+# Add specific context for this session
+monty code --context="Focus on fixing the login bug in auth.ts"
 ```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `monty` | Auto-detect mode (shows help if not initialized) |
+| `monty init` | Initialize a new project with feature list |
+| `monty code` | Continue incremental development |
+| `monty status` | Show project progress and feature status |
+| `monty setup` | Set up Monty in current directory |
+| `monty --help` | Show detailed help |
+
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `--spec="..."` | Project specification for initialization |
+| `--context="..."` | Additional context for coding session |
+| `--help, -h` | Show help |
+| `--version, -v` | Show version |
 
 ## How It Works
 
-### First Run (Initializer Agent)
+### Two-Agent Architecture
 
-When you first run the framework, the Initializer Agent:
+Monty uses a sophisticated two-agent system:
+
+```
+┌─────────────────┐     First Run     ┌─────────────────┐
+│                 │ ───────────────── │   Initializer   │
+│   Your Idea     │                   │      Agent      │
+│                 │                   │                 │
+└─────────────────┘                   └────────┬────────┘
+                                               │
+                                               │ Creates
+                                               ▼
+                                      ┌─────────────────┐
+                                      │ .agent/         │
+                                      │ - feature_list  │
+                                      │ - progress.txt  │
+                                      └────────┬────────┘
+                                               │
+┌─────────────────┐   Subsequent      ┌────────▼────────┐
+│   Production    │ ◄──────────────── │    Coding       │
+│   Ready App     │     Runs          │    Agent        │
+│                 │                   │                 │
+└─────────────────┘                   └─────────────────┘
+```
+
+### Initializer Agent (First Run)
+
+When you first run `monty init`:
 
 1. Analyzes your project specification
-2. Generates a comprehensive `feature_list.json` with ALL features marked as `passes: false`
-3. Creates `claude-progress.txt` with initial project context
-4. Sets up `init.sh`/`init.ps1` scripts for environment bootstrapping
-5. Makes an initial git commit
+2. Detects existing tech stack (if any)
+3. Generates comprehensive `feature_list.json` with ALL features marked as `passes: false`
+4. Creates `claude-progress.txt` for session bridging
+5. Makes initial git commit
 
-### Subsequent Runs (Coding Agent)
+### Coding Agent (Every Session)
 
-Every subsequent session, the Coding Agent:
+When you run `monty code`:
 
-1. Reads `claude-progress.txt` and git logs to understand current state
-2. Runs the init script to start the development server
-3. Verifies basic functionality still works via browser automation
-4. Selects the highest-priority failing feature
-5. Implements the feature incrementally
-6. Tests using browser automation (as a human would)
-7. Updates feature status and commits changes
-8. Logs progress for the next session
+1. Reads progress file and git logs to understand current state
+2. Runs health checks and validates environment
+3. Selects highest-priority failing feature
+4. Implements feature incrementally
+5. Tests using browser automation
+6. Updates feature status and commits changes
+7. Logs progress for the next session
+
+## Feature Detection
+
+Monty automatically detects and adapts to:
+
+**Frameworks:** React, Next.js, Vue, Svelte, Angular, Vanilla JS
+**Build Tools:** Vite, Webpack, Rollup, Turbopack
+**Testing:** Vitest, Jest, Playwright, Cypress
+**Backend:** Supabase, Express, Fastify, Next.js API
+**Databases:** PostgreSQL, MySQL, MongoDB, SQLite
+**Styling:** Tailwind CSS, CSS Modules, Styled Components, SASS
+**Package Managers:** npm, yarn, pnpm, bun
+
+## Files Created
+
+```
+your-project/
+└── .agent/                        # Monty's working directory
+    ├── feature_list.json          # Feature tracking (immutable structure)
+    ├── claude-progress.txt        # Session logs for context bridging
+    ├── error-log.json             # Error history for recovery
+    └── checkpoints.json           # Recovery checkpoints
+```
 
 ## Feature List Format
 
 ```json
 {
-  "id": "feat-001",
-  "category": "functional",
-  "priority": 1,
-  "description": "New chat button creates a fresh conversation",
-  "steps": [
-    "Navigate to main interface",
-    "Click the 'New Chat' button",
-    "Verify a new conversation is created",
-    "Check that chat area shows welcome state",
-    "Verify conversation appears in sidebar"
-  ],
-  "passes": false,
-  "last_tested": null,
-  "notes": ""
+  "project": {
+    "name": "My App",
+    "description": "A modern todo application",
+    "created_at": "2025-01-15T00:00:00Z",
+    "stack": ["react", "typescript", "tailwind", "supabase"]
+  },
+  "features": [
+    {
+      "id": "feat-001",
+      "category": "functional",
+      "priority": 1,
+      "description": "User can create new todo items",
+      "steps": [
+        "Navigate to main interface",
+        "Click 'Add Todo' button",
+        "Enter todo text",
+        "Verify todo appears in list"
+      ],
+      "passes": false,
+      "last_tested": null,
+      "notes": ""
+    }
+  ]
 }
 ```
 
-### Categories
+### Feature Categories
 
 - **functional** - Core application logic and features
 - **ui** - User interface elements, styling, responsiveness
@@ -132,19 +306,41 @@ Every subsequent session, the Coding Agent:
 - **performance** - Loading times, optimizations
 - **accessibility** - Keyboard navigation, screen readers, ARIA
 
-## Constraints (Poka-yoke)
+## Poka-yoke Safeguards
 
 The framework enforces these rules to prevent common agent failures:
 
 1. **Cannot delete features** from the feature list
-2. **Cannot modify test steps** (steps are immutable)
+2. **Cannot modify test steps** (steps are immutable after creation)
 3. **Cannot modify descriptions** after creation
 4. **Must verify via browser** before marking features as passing
 5. **Must commit changes** before ending a session
 
+## Best Practices
+
+Based on [Anthropic's documentation](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents):
+
+| Best Practice | Implementation |
+|--------------|----------------|
+| Incremental Progress | Work on ONE feature at a time |
+| Clean State | Always leave codebase in committable state |
+| Browser Verification | Test as a human user would |
+| Progress Logging | Document everything for the next session |
+| Git Discipline | Descriptive commits for every change |
+
+## Failure Modes Addressed
+
+| Problem | Solution |
+|---------|----------|
+| Agent declares victory too early | Feature list requires ALL features to pass |
+| Leaves environment with bugs | Must verify via browser before marking done |
+| Marks features done prematurely | Browser automation required for verification |
+| Spends time figuring out setup | Automated project detection and init scripts |
+| Loses context between sessions | claude-progress.txt + git logs |
+
 ## Configuration
 
-Edit `src/config/agent-config.ts` to customize:
+For advanced customization, modify `src/config/agent-config.ts`:
 
 ```typescript
 export const agentConfig = {
@@ -158,62 +354,88 @@ export const agentConfig = {
     coding: ['Read', 'Edit', 'Bash', 'Glob', 'Browser'],
   },
   permissionMode: 'acceptEdits',
-  // ... more options
+  session: {
+    maxRetries: 3,
+    autoCommit: true,
+  },
 };
 ```
 
-## Using on Other Projects
+## Development
 
-1. Copy this framework to your new project directory
-2. Update `package.json` with your project details
-3. Run `npm install`
-4. Run `npm start` and provide your project specification
-5. The initializer will create a feature list tailored to your project
-6. Run `npm run agent:code` for each development session
+### Building from Source
 
-## Commands
+```bash
+# Clone the repository
+git clone https://github.com/dobeutech/monty-ai-fullstackdev-coder.git
+cd monty-ai-fullstackdev-coder
 
-| Command | Description |
-|---------|-------------|
-| `npm start` | Auto-detect mode (init or coding) |
-| `npm run agent:init` | Force initialization mode |
-| `npm run agent:code` | Force coding mode |
-| `npm run build` | Compile TypeScript |
-| `npm run typecheck` | Type check without emitting |
-| `npm run help` | Show usage information |
+# Install dependencies
+npm install
 
-## Best Practices
+# Build
+npm run build
 
-Based on [Anthropic's documentation](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents):
+# Run in development mode
+npm run dev
+```
 
-1. **Incremental Progress** - Work on ONE feature at a time
-2. **Clean State** - Always leave codebase in committable state
-3. **Browser Verification** - Test as a human user would
-4. **Progress Logging** - Document everything for the next session
-5. **Git Discipline** - Descriptive commits for every change
+### Project Structure
 
-## Failure Modes Addressed
+```
+monty-fullstack-agent/
+├── bin/
+│   └── cli.js                 # CLI entry point
+├── src/
+│   ├── agents/
+│   │   ├── initializer.ts     # First-run setup agent
+│   │   ├── coding.ts          # Incremental progress agent
+│   │   └── prompts/           # System prompts
+│   ├── config/
+│   │   ├── agent-config.ts    # Shared configuration
+│   │   └── mcp-config.ts      # Browser automation settings
+│   ├── utils/                 # Utility modules
+│   └── index.ts               # Main entry point
+├── templates/                 # File templates
+└── scripts/                   # Init scripts
+```
 
-| Problem | Solution |
-|---------|----------|
-| Agent declares victory too early | Feature list requires ALL features to pass |
-| Leaves environment with bugs | Must verify via browser before marking done |
-| Marks features done prematurely | Browser automation required for verification |
-| Spends time figuring out setup | init.sh/init.ps1 scripts automate this |
-| Loses context between sessions | claude-progress.txt + git logs |
+## Environment Variables
 
-## Best Practices Implementation
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `ANTHROPIC_API_KEY` | Your Claude API key | Yes |
+| `FORCE_INIT` | Force initialization mode | No |
 
-This framework implements comprehensive best practices for full-stack development:
+## Troubleshooting
 
-- **Project Detection**: Automatically adapts to React, Next.js, Vue, and other frameworks
-- **Code Quality**: Enforces TypeScript, ESLint, and Prettier standards
-- **Security**: Monitors dependencies for vulnerabilities
-- **Git Discipline**: Conflict detection and workflow guidance
-- **Error Recovery**: Checkpoint system for rollback capability
-- **Health Monitoring**: Comprehensive system health checks
+### "Feature list not found"
 
-See [BEST_PRACTICES.md](./BEST_PRACTICES.md) for detailed documentation.
+Run `monty init` first to initialize the project.
+
+### "ANTHROPIC_API_KEY not set"
+
+Set your API key:
+```bash
+export ANTHROPIC_API_KEY="your-key-here"
+```
+
+### "Permission denied"
+
+Ensure the CLI is executable:
+```bash
+chmod +x $(which monty)
+```
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## References
 
@@ -224,4 +446,26 @@ See [BEST_PRACTICES.md](./BEST_PRACTICES.md) for detailed documentation.
 
 ## License
 
-MIT
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
+
+**You are free to:**
+- Share and redistribute the material
+- Adapt, remix, and build upon the material
+
+**Under these terms:**
+- **Attribution** - You must give appropriate credit to Dobeu Tech Solutions LLC
+- **NonCommercial** - You may not use the material for commercial purposes
+
+**For commercial licensing:**
+- Email: jeremyw@dobeu.net
+- Website: [dobeu.net](https://dobeu.net)
+- Terms of Service: [dobeu.net/tos](https://dobeu.net/tos)
+- Privacy Policy: [dobeu.net/privacy](https://dobeu.net/privacy)
+
+See [LICENSE](LICENSE) for full details.
+
+---
+
+Copyright (c) 2025 **[Dobeu Tech Solutions LLC](https://dobeu.net)** - All Rights Reserved
+
+Made with Claude Agent SDK
