@@ -1,0 +1,150 @@
+{
+  "version": "1.0.0",
+  "_comment": "Auto-generated starter rules. Run .claude/scripts/generate-skill-rules.ts to refresh.",
+  "skills": {
+    "composio-fullstack-pipeline": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["build me", "ship to production", "agentic coding", "scaffold", "full-stack", "deploy", "MVP", "end-to-end"],
+        "intentPatterns": ["build.*(app|saas|tool)", "take.*to production", "ship.*(prototype|product)"]
+      }
+    },
+    "git-worktrees-pro": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["worktree", "parallel branches", "concurrent development", "isolated workspace"],
+        "intentPatterns": ["work.*in parallel", "compare.*implementations", "try.*approaches"]
+      }
+    },
+    "claude-api": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["claude api", "anthropic sdk", "prompt caching", "tool use", "extended thinking", "claude 4.5", "claude 4.6", "claude 4.7"],
+        "intentPatterns": ["migrate.*claude", "claude.*model.*upgrade", "anthropic.*sdk"]
+      }
+    },
+    "document-skills:xlsx": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["spreadsheet", "excel", ".xlsx", ".csv", ".tsv", "pivot table", "formula"],
+        "intentPatterns": ["create.*spreadsheet", "analyze.*data", "export.*excel"]
+      }
+    },
+    "document-skills:docx": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["word doc", "word document", ".docx", "report", "memo", "letter"],
+        "intentPatterns": ["create.*(document|report|memo)", "write.*letter"]
+      }
+    },
+    "document-skills:pptx": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["powerpoint", "slides", "deck", "presentation", ".pptx", "pitch"],
+        "intentPatterns": ["create.*(deck|slides|presentation)", "build.*pitch"]
+      }
+    },
+    "document-skills:pdf": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["pdf", ".pdf", "extract text", "ocr", "merge pdfs"],
+        "intentPatterns": ["read.*pdf", "fill.*form", "merge.*pdf"]
+      }
+    },
+    "ultimate-skill-creator:create-ultimate-skill": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["create a skill", "review my skill", "skill description", "skill best practices"],
+        "intentPatterns": ["build.*skill", "improve.*skill"]
+      }
+    },
+    "superpowers:brainstorming": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["brainstorm", "explore options", "ideas for"],
+        "intentPatterns": ["help me think.*through", "what.*should.*build"]
+      }
+    },
+    "superpowers:test-driven-development": {
+      "type": "guardrail",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["tdd", "test-driven", "write tests first", "red-green-refactor"],
+        "intentPatterns": ["implement.*(feature|bugfix)", "fix.*bug"]
+      }
+    },
+    "superpowers:systematic-debugging": {
+      "type": "guardrail",
+      "enforcement": "suggest",
+      "priority": "high",
+      "promptTriggers": {
+        "keywords": ["bug", "test failure", "debug", "error", "broken", "unexpected behavior"],
+        "intentPatterns": ["why.*(failing|broken|not working)", "fix.*(error|bug)"]
+      }
+    },
+    "superpowers:verification-before-completion": {
+      "type": "guardrail",
+      "enforcement": "warn",
+      "priority": "critical",
+      "promptTriggers": {
+        "keywords": ["mark as done", "ship it", "ready to merge", "looks good", "lgtm"],
+        "intentPatterns": ["complete.*(task|feature)", "finish.*(implementation|work)"]
+      }
+    },
+    "marketing-skills:copywriting": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["landing page", "headline", "value proposition", "marketing copy", "cta"],
+        "intentPatterns": ["write.*copy", "improve.*(headline|messaging)"]
+      }
+    },
+    "marketing-skills:seo-audit": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["seo audit", "technical seo", "core web vitals", "meta tags", "ranking"],
+        "intentPatterns": ["audit.*seo", "why.*not ranking"]
+      }
+    },
+    "mongodb:mongodb-schema-design": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["mongodb", "schema design", "embed vs reference", "data model"],
+        "intentPatterns": ["design.*schema", "model.*data"]
+      }
+    },
+    "plugin-dev:plugin-structure": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "promptTriggers": {
+        "keywords": ["plugin.json", "claude code plugin", "scaffold a plugin"],
+        "intentPatterns": ["create.*plugin", "organize.*plugin"]
+      }
+    }
+  }
+}

@@ -33,6 +33,30 @@ npm run typecheck
 npm run clean
 ```
 
+### Test Commands
+
+```bash
+# Run tests once (Vitest)
+npm test
+
+# Watch mode (re-runs on file change)
+npm run test:watch
+
+# Run a single test file
+npx vitest run tests/auth.test.ts
+
+# Run tests matching a name pattern
+npx vitest run -t "auth manager"
+```
+
+Tests live at `tests/*.test.ts` and use **Vitest 4**. No project-level coverage threshold is configured.
+
+### Build Pipeline Detail
+
+`npm run build` runs `tsc && npm run copy-assets`. The `copy-assets` step uses `shx` to copy `src/agents/prompts/` and `templates/` into `dist/`.
+
+**Important:** when running the built CLI (`npm start` or the installed `monty` binary), edits to `src/agents/prompts/*.md` or files in `templates/` require a rebuild — they are not read from source paths at runtime. `npm run dev` (tsx) does read from source.
+
 ### Running the Agent
 ```bash
 # Force initialization mode
@@ -58,6 +82,10 @@ monty --help
 monty login
 monty init --spec="Build a todo app"
 ```
+
+### CLI Entry Points
+
+`bin/cli.js` is the published CLI shim that loads `dist/index.js`. `package.json` registers it under three commands: `monty`, `monty-agent`, and `fullstack-agent` — all three are aliases for the same binary.
 
 ## Authentication System
 
@@ -120,7 +148,7 @@ if (shouldInitialize) {
 
 **Coding Agent** (`src/agents/coding.ts`):
 - Runs **every subsequent session**
-- Allowed tools: `['Read', 'Edit', 'Bash', 'Glob', 'Grep', 'Browser', 'Task']`
+- Allowed tools: `['Read', 'Edit', 'Bash', 'Glob', 'Grep', 'Browser', 'Task']` (the `Browser` entry corresponds to the Puppeteer MCP server defined in `src/config/mcp-config.ts` — there is no stock SDK tool by that name)
 - Follows 7-step startup sequence (see `prompts/coding.md`)
 - Implements ONE feature per session
 - Tests via browser automation
@@ -187,6 +215,10 @@ Created during initialization, consumed by coding agent:
 
 **`audit_log.jsonl`** - Records all file modifications for security
 
+### Templates Directory
+
+`templates/feature_list.template.json` and `templates/progress.template.txt` are seed files used by the Initializer agent. They are shipped via the `files` array in `package.json` and copied to `dist/templates/` by the `copy-assets` build step.
+
 ## Utilities Reference
 
 ### Feature Management
@@ -247,6 +279,18 @@ Created during initialization, consumed by coding agent:
 - Ensures dependencies are installed
 - Confirms browser automation is available
 - Returns pass/fail status with warnings
+
+## Project Hooks (`.claude/`)
+
+This repo has a project-local Claude Code harness:
+
+- `.claude/settings.json` registers two hooks:
+  - **UserPromptSubmit** → `.claude/hooks/skill-activation-prompt.sh` — matches each user prompt against `.claude/skills/skill-rules.json` and prints CRITICAL/RECOMMENDED/SUGGESTED skill suggestions before the model responds.
+  - **SessionStart** → `.claude/hooks/connection-trueup.sh` — runs the connection catalog check at the start of every session.
+- Both shell wrappers shell out to TypeScript files via `npx tsx`. Hook deps live in `.claude/hooks/{package.json, node_modules}`.
+- Maintenance scripts (run manually) live in `.claude/scripts/`: `skill-doctor.ts` (validates skill frontmatter and scores), `detect-skill-overlap.ts` (Jaccard overlap scan), `generate-skill-rules.ts` (auto-extracts triggers from skill descriptions — noisy, treat as starter), `checkpoint.ts` (writes `.agent/state.json` and progress, optional commit).
+
+When editing skill rules, edit `.claude/skills/skill-rules.json` directly — the generated rules from `generate-skill-rules.ts` are a starting point, not a replacement.
 
 ## Poka-yoke Constraints
 

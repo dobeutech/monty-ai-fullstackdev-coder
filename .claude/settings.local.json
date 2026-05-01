@@ -17,7 +17,8 @@
       "Bash(.yaml \")",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(npx tsc *)"
     ]
   }
 }
