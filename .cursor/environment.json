@@ -1,0 +1,4 @@
+{
+  "name": "Monty Full-Stack Agent",
+  "install": "npm ci"
+}
