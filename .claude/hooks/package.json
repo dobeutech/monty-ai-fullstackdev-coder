@@ -8,7 +8,7 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "tsx": "^4.7.0"
+    "tsx": "^4.23.13"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
